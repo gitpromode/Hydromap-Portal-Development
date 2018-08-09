@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.core.serializers import serialize
 
 from core.models import Hydropower
 
@@ -19,6 +20,5 @@ class HydropowerSerializer(serializers.ModelSerializer):
             'gapanapa',
             'river',
             'start_date',
-            'latitude',
-            'longitude'
+            'latlong',
             )

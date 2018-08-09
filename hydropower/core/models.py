@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db.models import PointField
 
 # Create your models here.
 
@@ -44,8 +45,7 @@ class Hydropower(models.Model):
     gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE)
     river = models.CharField(max_length=100)
     start_date = models.CharField(max_length=50)
-    latitude = models.FloatField(default=0)
-    longitude = models.FloatField(default=0)
+    latlong = PointField(null=True)
 
     class Meta:
         ordering = ['name']
