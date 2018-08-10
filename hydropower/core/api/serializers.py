@@ -20,5 +20,4 @@ class HydropowerSerializer(serializers.ModelSerializer):
             'gapanapa',
             'river',
             'start_date',
-            'latlong',
             )

@@ -3,6 +3,7 @@ from django.contrib.gis.db.models import PointField
 
 # Create your models here.
 
+
 class Province(models.Model):
     name = models.CharField(max_length=100)
 
