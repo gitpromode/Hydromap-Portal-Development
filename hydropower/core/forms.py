@@ -12,18 +12,18 @@ class DistrictCreateForm(forms.ModelForm):
 
 	class Meta:
 		model = District
-		fields = ('name',)
+		fields = ('name', 'province',)
 
 
 class GapaNapaCreateForm(forms.ModelForm):
 
 	class Meta:
 		model = GapaNapa
-		fields = ('name',)
+		fields = ('name', 'district',)
 
 
 class HydropowerCreateForm(forms.ModelForm):
 
 	class Meta:
 		model = Hydropower
-		fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties')
+		fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties', 'gapanapa',)

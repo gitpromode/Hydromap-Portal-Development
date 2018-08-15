@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DISTRICT GAPANAPA</title>
+</head>
+<body>
+	<div>
+		<h4>District</h4>
+		{{ district.name }}
+	</div>
+	<div>
+		{% for gapanapa in district_gapanapa %}
+
+		<h4>GapaNapa {{ forloop.counter }}. {{ gapanapa.name }}</h4>
+		<br><br>
+		<h5>Hydropower</h5>
+		{% for hydropower in gapanapa.hydropower.all %}
+		{{ forloop.counter }}.{{ hydropower.name }}<br>
+		{% endfor %}
+		{% endfor %}
+		<a href="{% url 'core:gapanapa_add' %}">Add New GapaNapa</a>
+	</div>
+	<br><br>
+
+</body>
+</html>

@@ -4,7 +4,8 @@ from . import views
 from .views import CoresDashboardView, ProvinceListView, ProvinceDetailView, ProvinceCreateView, ProvinceUpdateView, \
 ProvinceDeleteView, DistrictListView, DistrictDetailView, DistrictCreateView, DistrictUpdateView, DistrictDeleteView, \
 GapaNapaListView, GapaNapaDetailView, GapaNapaCreateView, GapaNapaUpdateView, GapaNapaDeleteView, \
-HydropowerListView, HydropowerDetailView, HydropowerCreateView, HydropowerUpdateView, HydropowerDeleteView
+HydropowerListView, HydropowerDetailView, HydropowerCreateView, HydropowerUpdateView, HydropowerDeleteView, \
+DistrictGapaNapaView
 
 app_name = 'core'
 
@@ -30,4 +31,5 @@ urlpatterns = [
     path('hydropower-add/', HydropowerCreateView.as_view(), name='hydropower_add'),
     path('hydropower-edit/<int:pk>/', HydropowerUpdateView.as_view(), name='hydropower_edit'),
 	path('hydropower-delete/<int:pk>/', HydropowerDeleteView.as_view(), name='hydropower_delete'),
+	path('district-gapanapa/<int:district_pk>', DistrictGapaNapaView.as_view(), name='district_gapanapa'),
 ]

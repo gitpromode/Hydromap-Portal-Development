@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from .models import Province, District, GapaNapa, Hydropower
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
@@ -21,9 +21,13 @@ class ProvinceDetailView(DetailView):
 	model = Province
 	template_name = 'core/province_detail.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['districts'] = District.objects.filter(province_id=self.kwargs['pk'])
+		return context
+
 class ProvinceCreateView(CreateView):
 	model = Province
-	#fields = ('name',)
 	form_class = ProvinceCreateForm
 	template_name = 'core/province_form.html'
 	success_url = reverse_lazy('core:province_list')
@@ -51,9 +55,13 @@ class DistrictDetailView(DetailView):
 	model = District
 	template_name = 'core/district_detail.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['gapanapas'] = GapaNapa.objects.filter(district_id=self.kwargs['pk'])
+		return context
+
 class DistrictCreateView(CreateView):
 	model = District
-	#fields = ('name',)
 	form_class = DistrictCreateForm
 	template_name = 'core/district_form.html'
 	success_url = reverse_lazy('core:district_list')
@@ -62,7 +70,7 @@ class DistrictCreateView(CreateView):
 class DistrictUpdateView(UpdateView):
 	model = District
 	template_name = 'core/district_form.html'
-	fields = ('name',)
+	fields = ('name', 'province',)
 	success_url = reverse_lazy('core:district_list')
 
 
@@ -81,9 +89,14 @@ class GapaNapaDetailView(DetailView):
 	model = GapaNapa
 	template_name = 'core/gapanapa_detail.html'
 
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['hydropowers'] = Hydropower.objects.filter(gapanapa_id=self.kwargs['pk'])
+		return context
+
+
 class GapaNapaCreateView(CreateView):
 	model = GapaNapa
-	#fields = ('name',)
 	form_class = GapaNapaCreateForm
 	template_name = 'core/gapanapa_form.html'
 	success_url = reverse_lazy('core:gapanapa_list')
@@ -92,7 +105,7 @@ class GapaNapaCreateView(CreateView):
 class GapaNapaUpdateView(UpdateView):
 	model = GapaNapa
 	template_name = 'core/gapanapa_form.html'
-	fields = ('name',)
+	fields = ('name', 'district',)
 	success_url = reverse_lazy('core:gapanapa_list')
 
 
@@ -121,7 +134,7 @@ class HydropowerCreateView(CreateView):
 class HydropowerUpdateView(UpdateView):
 	model = Hydropower
 	template_name = 'core/hydropower_form.html'
-	fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties')
+	fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties', 'gapanapa',)
 	success_url = reverse_lazy('core:hydropower_list')
 
 
@@ -129,3 +142,13 @@ class HydropowerDeleteView(DeleteView):
 	model = Hydropower
 	template_name = 'core/hydropower_delete.html'
 	success_url = reverse_lazy('core:hydropower_list')
+
+
+class DistrictGapaNapaView(TemplateView):
+	template_name = 'core/district_gapanapa.html'
+
+	def get_context_data(self, **kwargs):
+		context = super().get_context_data(**kwargs)
+		context['district'] = District.objects.get(id=self.kwargs['district_pk'])
+		context['district_gapanapa'] = GapaNapa.objects.filter(district_id=self.kwargs['district_pk'])
+		return context

@@ -4,7 +4,13 @@
 	<title>DISTRICT DETAIL</title>
 </head>
 <body>
-	<h4>District</h4>
-	name : {{ object.name}}
+<h4>District</a></h4>
+{{ object.name }}
+<br><br>
+<h4>GapaNapa</a></h</h4>
+{% for gapanapa in gapanapas %}<br>
+{{ gapanapa }}
+{% endfor %}
+<a href="{% url 'core:gapanapa_add' %}">Add new GapaNapa</a>
 </body>
 </html>

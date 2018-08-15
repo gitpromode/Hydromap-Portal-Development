@@ -5,6 +5,15 @@
 </head>
 <body>
 	<h4>Province</h4>
-	name : {{ object.name}}
+	{{ object.name}}
+	<br><br>
+	<h4>Districts</h4>
+	{% for district in districts %}<br>
+	{{ forloop.counter }}.<a href="{% url 'core:district_gapanapa' district.pk %}">{{ district }}</a>
+	{% endfor %}<br><br>
+	{% for obj in object_list %}
+	{{forloop.counter}}. <a href="{% url 'core:district_detail' obj.id %}">{{ obj.name }}</a>
+	{% endfor %}
+	<a href="{% url 'core:district_add' %}">Add New District</a>
 </body>
 </html>
