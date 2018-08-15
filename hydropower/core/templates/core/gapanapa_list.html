@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GAPANAPA LIST</title>
+</head>
+<body>
+<h4>GapaNapa List</a></h4>
+{% for obj in object_list %}
+	{{forloop.counter}}. <a href="{% url 'core:gapanapa_detail' obj.id %}">{{ obj.name }}</a>
+	&nbsp;&nbsp;&nbsp;<a href="{% url 'core:gapanapa_edit' obj.id %}">Edit</a>
+	&nbsp;&nbsp;&nbsp;<a href="{% url 'core:gapanapa_delete' obj.id %}">Delete</a>
+	<br>
+{% endfor %}
+<br><br><br>
+<a href="{% url 'core:gapanapa_add' %}">Add GapaNapa</a>
+</body>
+</html>

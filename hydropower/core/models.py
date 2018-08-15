@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.gis.db.models import PointField
+from jsonfield import JSONField
 
 # Create your models here.
 
@@ -47,6 +48,7 @@ class Hydropower(models.Model):
     river = models.CharField(max_length=100)
     start_date = models.CharField(max_length=50)
     latlong = PointField(null=True)
+    other_properties = JSONField(max_length=140, default='SOME STRING')
 
     class Meta:
         ordering = ['name']

@@ -3,7 +3,7 @@ from .settings import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'hydro',
+        'NAME': 'hydropower',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': '',
