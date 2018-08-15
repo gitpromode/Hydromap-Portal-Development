@@ -1,8 +1,8 @@
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from .models import Province, District, GapaNapa
+from .models import Province, District, GapaNapa, Hydropower
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-from .forms import ProvinceCreateForm, DistrictCreateForm, GapaNapaCreateForm
+from .forms import ProvinceCreateForm, DistrictCreateForm, GapaNapaCreateForm, HydropowerCreateForm
 from django.urls import reverse_lazy
 
 
@@ -100,3 +100,32 @@ class GapaNapaDeleteView(DeleteView):
 	model = GapaNapa
 	template_name = 'core/gapanapa_delete.html'
 	success_url = reverse_lazy('core:gapanapa_list')
+
+
+class HydropowerListView(ListView):
+	model = Hydropower
+	template_name = 'core/hydropower_list.html'
+
+
+class HydropowerDetailView(DetailView):
+	model = Hydropower
+	template_name = 'core/hydropower_detail.html'
+
+class HydropowerCreateView(CreateView):
+	model = Hydropower
+	form_class = HydropowerCreateForm
+	template_name = 'core/hydropower_form.html'
+	success_url = reverse_lazy('core:hydropower_list')
+
+
+class HydropowerUpdateView(UpdateView):
+	model = Hydropower
+	template_name = 'core/hydropower_form.html'
+	fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties')
+	success_url = reverse_lazy('core:hydropower_list')
+
+
+class HydropowerDeleteView(DeleteView):
+	model = Hydropower
+	template_name = 'core/hydropower_delete.html'
+	success_url = reverse_lazy('core:hydropower_list')

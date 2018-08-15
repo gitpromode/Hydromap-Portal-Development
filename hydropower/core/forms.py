@@ -1,5 +1,5 @@
 from django import forms
-from .models import Province, District, GapaNapa
+from .models import Province, District, GapaNapa, Hydropower
 
 class ProvinceCreateForm(forms.ModelForm):
 
@@ -20,3 +20,10 @@ class GapaNapaCreateForm(forms.ModelForm):
 	class Meta:
 		model = GapaNapa
 		fields = ('name',)
+
+
+class HydropowerCreateForm(forms.ModelForm):
+
+	class Meta:
+		model = Hydropower
+		fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties')

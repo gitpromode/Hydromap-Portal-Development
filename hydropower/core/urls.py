@@ -3,7 +3,8 @@ from django.urls import path, include
 from . import views
 from .views import CoresDashboardView, ProvinceListView, ProvinceDetailView, ProvinceCreateView, ProvinceUpdateView, \
 ProvinceDeleteView, DistrictListView, DistrictDetailView, DistrictCreateView, DistrictUpdateView, DistrictDeleteView, \
-GapaNapaListView, GapaNapaDetailView, GapaNapaCreateView, GapaNapaUpdateView, GapaNapaDeleteView
+GapaNapaListView, GapaNapaDetailView, GapaNapaCreateView, GapaNapaUpdateView, GapaNapaDeleteView, \
+HydropowerListView, HydropowerDetailView, HydropowerCreateView, HydropowerUpdateView, HydropowerDeleteView
 
 app_name = 'core'
 
@@ -24,4 +25,9 @@ urlpatterns = [
     path('gapanapa-add/', GapaNapaCreateView.as_view(), name='gapanapa_add'),
     path('gapanapa-edit/<int:pk>/', GapaNapaUpdateView.as_view(), name='gapanapa_edit'),
 	path('gapanapa-delete/<int:pk>/', GapaNapaDeleteView.as_view(), name='gapanapa_delete'),
+	path('hydropower-list', HydropowerListView.as_view(), name='hydropower_list'),
+    path('hydropower-detail/<int:pk>/', HydropowerDetailView.as_view(), name='hydropower_detail'),
+    path('hydropower-add/', HydropowerCreateView.as_view(), name='hydropower_add'),
+    path('hydropower-edit/<int:pk>/', HydropowerUpdateView.as_view(), name='hydropower_edit'),
+	path('hydropower-delete/<int:pk>/', HydropowerDeleteView.as_view(), name='hydropower_delete'),
 ]

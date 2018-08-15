@@ -47,8 +47,8 @@ class Hydropower(models.Model):
     gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE)
     river = models.CharField(max_length=100)
     start_date = models.CharField(max_length=50)
-    latlong = PointField(null=True)
-    other_properties = JSONField(max_length=140, default='SOME STRING')
+    latlong = PointField(null=True, blank=True)
+    other_properties = JSONField(null=True, blank=True)
 
     class Meta:
         ordering = ['name']
