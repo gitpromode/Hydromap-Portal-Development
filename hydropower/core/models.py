@@ -41,7 +41,7 @@ class Hydropower(models.Model):
     shape = models.CharField(max_length=50)
     name = models.CharField(max_length=200)
     proj_size = models.CharField(max_length=100)
-    trans_cate = models.IntegerField(default=0)
+    trans_cate = models.CharField(max_length=100)
     province = models.ForeignKey(Province, related_name="hydropower",  on_delete=models.CASCADE)
     district = models.ForeignKey(District, related_name="hydropower",  on_delete=models.CASCADE)
     gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE)
