@@ -38,20 +38,22 @@ class GapaNapa(models.Model):
 
 
 class Hydropower(models.Model):
-    shape = models.CharField(max_length=50)
-    name = models.CharField(max_length=200)
-    proj_size = models.CharField(max_length=100)
-    trans_cate = models.CharField(max_length=100)
-    province = models.ForeignKey(Province, related_name="hydropower",  on_delete=models.CASCADE)
-    district = models.ForeignKey(District, related_name="hydropower",  on_delete=models.CASCADE)
-    gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE)
+    province = models.ForeignKey(Province, related_name="hydropower",  on_delete=models.CASCADE, null=True, blank=True)
+    district = models.ForeignKey(District, related_name="hydropower",  on_delete=models.CASCADE, null=True, blank=True)
+    gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE, null=True, blank=True)
+    project = models.CharField(max_length=200)
+    capacity = models.CharField(max_length=100)
     river = models.CharField(max_length=100)
-    start_date = models.CharField(max_length=50)
+    lic_number = models.IntegerField(null=True, blank=True)
+    issue_date = models.CharField(max_length=50)
+    validity = models.CharField(max_length=100)
+    promoter = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
     latlong = PointField(null=True, blank=True)
     other_properties = JSONField(null=True, blank=True)
 
     class Meta:
-        ordering = ['name']
+        ordering = ['project']
 
     def __str__(self):
-        return self.name
+        return self.project

@@ -26,4 +26,4 @@ class HydropowerCreateForm(forms.ModelForm):
 
 	class Meta:
 		model = Hydropower
-		fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties', 'gapanapa',)
+		fields = ('province', 'district', 'gapanapa', 'project', 'capacity', 'river', 'lic_number', 'issue_date', 'validity', 'promoter', 'address', 'latlong', 'other_properties', 'gapanapa',)

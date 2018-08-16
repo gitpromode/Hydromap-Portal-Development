@@ -136,7 +136,7 @@ class HydropowerCreateView(CreateView):
 class HydropowerUpdateView(UpdateView):
 	model = Hydropower
 	template_name = 'core/hydropower_form.html'
-	fields = ('shape', 'name', 'proj_size', 'trans_cate', 'province', 'district', 'gapanapa', 'river', 'start_date', 'latlong', 'other_properties', 'gapanapa',)
+	fields = ('province', 'district', 'gapanapa', 'project', 'capacity', 'river', 'lic_number', 'issue_date', 'validity', 'promoter', 'address', 'latlong', 'other_properties', 'gapanapa',)
 	success_url = reverse_lazy('core:hydropower_list')
 
 
