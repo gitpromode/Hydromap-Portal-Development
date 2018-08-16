@@ -26,6 +26,7 @@ class ProvinceDetailView(DetailView):
 		context['districts'] = District.objects.filter(province_id=self.kwargs['pk'])
 		return context
 
+
 class ProvinceCreateView(CreateView):
 	model = Province
 	form_class = ProvinceCreateForm
@@ -59,6 +60,7 @@ class DistrictDetailView(DetailView):
 		context = super().get_context_data(**kwargs)
 		context['gapanapas'] = GapaNapa.objects.filter(district_id=self.kwargs['pk'])
 		return context
+		
 
 class DistrictCreateView(CreateView):
 	model = District

@@ -12,15 +12,13 @@
 		{% for gapanapa in district_gapanapa %}
 
 		<h4>GapaNapa {{ forloop.counter }}. {{ gapanapa.name }}</h4>
-		<br><br>
-		<h5>Hydropower</h5>
+		
 		{% for hydropower in gapanapa.hydropower.all %}
 		{{ forloop.counter }}.{{ hydropower.name }}<br>
 		{% endfor %}
 		{% endfor %}
+				<br><br>
 		<a href="{% url 'core:gapanapa_add' %}">Add New GapaNapa</a>
 	</div>
-	<br><br>
-
 </body>
 </html>

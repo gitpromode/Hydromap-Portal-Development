@@ -7,10 +7,11 @@
 <h4>District</a></h4>
 {{ object.name }}
 <br><br>
-<h4>GapaNapa</a></h</h4>
+<h4>GapaNapa</a><</h4>
 {% for gapanapa in gapanapas %}<br>
-{{ gapanapa }}
+	{{ gapanapa }}
 {% endfor %}
+<br><br>
 <a href="{% url 'core:gapanapa_add' %}">Add new GapaNapa</a>
 </body>
 </html>
