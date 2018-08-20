@@ -42,14 +42,16 @@ class Hydropower(models.Model):
     district = models.ForeignKey(District, related_name="hydropower",  on_delete=models.CASCADE, null=True, blank=True)
     gapanapa = models.ForeignKey(GapaNapa, related_name="hydropower",  on_delete=models.CASCADE, null=True, blank=True)
     project = models.CharField(max_length=200)
-    capacity = models.CharField(max_length=100)
+    capacity = models.FloatField()
     river = models.CharField(max_length=100)
-    lic_number = models.IntegerField(null=True, blank=True)
+    lic_number = models.CharField(max_length=100, null=True, blank=True)
     issue_date = models.CharField(max_length=50)
     validity = models.CharField(max_length=100)
     promoter = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
     latlong = PointField(null=True, blank=True)
+    license_type = models.CharField(max_length=100)
+    date_of_operation = models.IntegerField(default=0)
     other_properties = JSONField(null=True, blank=True)
 
     class Meta:

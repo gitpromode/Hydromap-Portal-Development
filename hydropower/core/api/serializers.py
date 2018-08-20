@@ -10,14 +10,18 @@ class HydropowerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hydropower
         fields = (
-            'id',
-            'shape',
-            'name',
-            'proj_size',
-            'trans_cate',
             'province',
             'district',
             'gapanapa',
+            'project',
+            'capacity',
             'river',
-            'start_date',
+            'lic_number',
+            'issue_date',
+            'validity',
+            'promoter',
+            'address',
+            'latlong',
+            'other_properties',
+            'gapanapa'       
             )
