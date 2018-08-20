@@ -51,7 +51,7 @@ class Hydropower(models.Model):
     address = models.CharField(max_length=200)
     latlong = PointField(null=True, blank=True)
     license_type = models.CharField(max_length=100)
-    date_of_operation = models.IntegerField(default=0)
+    date_of_operation = models.CharField(max_length=100)
     other_properties = JSONField(null=True, blank=True)
 
     class Meta:
