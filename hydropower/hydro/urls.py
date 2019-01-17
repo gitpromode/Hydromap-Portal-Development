@@ -15,15 +15,22 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+from core.views import HomeView
 
 # if settings.DEBUG:
-#     import debug_toolbar
+#     import debug_toolbar2
 urlpatterns = [
 	path('core/', include('core.urls')),
+    path('userrole/', include('userrole.urls')),
     path('admin/', admin.site.urls),
+    path('', HomeView.as_view(), name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('api/', include('core.api.urls')),
+    path('', login_required(TemplateView.as_view(template_name='hydro/home.html')), name='home'),   
     # path('^__debug__/', include(debug_toolbar.urls)),
 ]
 

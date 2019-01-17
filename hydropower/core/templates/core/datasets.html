@@ -1,0 +1,2185 @@
+{% extends 'hydro/base.html' %}
+
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"  lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title> Niti-Foundation Datasets</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/dataTables.bootstrap4.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/buttons.bootstrap4.min.css' %}">
+        <script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+		<link href="https://fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+        <style>
+        .filter{
+            padding: 10px 10px;
+            top: -8px;
+        }
+                    .custom-popup-header {
+                        color: #3590f3;
+                        border-bottom: 1px solid #ccc;
+                    }
+                    #apply_button {
+                        padding: 6px 11px;
+                    }
+                    #clear1{
+                      padding: 6px 11px;  
+                    }
+                    .checkbox {
+                        float: left;
+                    }
+                    .multiselect.dropdown-toggle.btn.btn-default {
+                        font-size: 12px;
+                        margin-left: -3px;
+                    }
+                    .districtSelect {
+                        top: 104px !important; 
+                        left: -25px !important;
+                    }
+                    #statusSelect{    
+                        display: none;
+
+                    }
+                    #inputProvince{    
+                        display: none;
+
+                    }
+                    #inputDistrict{    
+                        display: none;
+                    }
+                    #inputLocalGovernment{    
+                        display: none;
+
+                    }
+                    #capacitySelect{
+                        display: none;
+                    }
+                   .multiselect-container>li>a>label {
+                         padding: 4px 20px 3px 20px;
+                         color:black;
+                    }       
+                    .modal-backdrop {
+                        z-index: 3;
+                    }
+                    .form-control{
+                        border: 0;
+                        border-bottom: 2px solid rgba(0,0,0,.1);
+                    }
+                        .imgcontainer {
+                        text-align: center;
+                        margin: 24px 0 12px 0;
+                        position: relative;
+                    }
+
+                    img.avatar {
+                        width: 40%;
+                        border-radius: 50%;
+                    }
+
+                    .container {
+                        padding: 16px;
+                    }
+
+                    span.psw {
+                        float: right;
+                        padding-top: 16px;
+                    }
+
+                    /* The Modal (background) */
+                    .modal {
+                        display: none; /* Hidden by default */
+                        position: fixed; /* Stay in place */
+                        z-index: 3; /* Sit on top */
+                        left: 0;
+                        top: 0;
+                        width: 100%; /* Full width */
+                        height: 100%; /* Full height */
+                        overflow: auto; /* Enable scroll if needed */
+                        background-color: rgb(0,0,0); /* Fallback color */
+                        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                        padding-top: 60px;
+                    }
+
+                    /* Modal Content/Box */
+                    .modal-content {
+                        background-color: #fefefe;
+                        margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+                        border: 1px solid #888;
+                        width: 80%; /* Could be more or less, depending on screen size */
+                    }
+
+                    /* The Close Button (x) */
+                    .close {
+                        position: absolute;
+                        right: 25px;
+                        top: 0;
+                        color: #000;
+                        font-size: 35px;
+                        font-weight: bold;
+                    }
+
+                    .close:hover,
+                    .close:focus {
+                        color: red;
+                        cursor: pointer;
+                    }
+
+                    /* Add Zoom Animation */
+                    .animate {
+                        -webkit-animation: animatezoom 0.6s;
+                        animation: animatezoom 0.6s
+                    }
+
+                    @-webkit-keyframes animatezoom {
+                        from {-webkit-transform: scale(0)} 
+                        to {-webkit-transform: scale(1)}
+                    }
+                        
+                    @keyframes animatezoom {
+                        from {transform: scale(0)} 
+                        to {transform: scale(1)}
+                    }
+
+                    /* Change styles for span and cancel button on extra small screens */
+                    @media screen and (max-width: 300px) {
+                        span.psw {
+                           display: block;
+                           float: none;
+                        }
+                        .cancelbtn {
+                           width: 100%;
+                        }
+                    }
+                        .js-typeahead-car_v1.typeahead.tt-input {
+
+                            padding-right: 0px;
+                            border-color: #a89138;
+
+                        }
+
+                    .tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
+                    .tt-hint, .tt-input {
+                        width: 396px;
+                        height: 30px;
+                        padding: 8px 12px;
+                        font-size: 24px;
+                        line-height: 30px;
+                        border: 2px solid #ccc;
+                        border-radius: 8px;
+                        outline: none;
+                    }
+
+
+                    .tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
+                        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+                    }
+
+                    .tt-hint {
+                        color: #999;
+                    }
+
+                    .tt-menu {
+
+                        width: 275px;
+                        margin-top: -1px;
+                        padding: 3px 0;
+                        */ border: 1px solid #ccc;
+                        border: 1px solid rgba(0, 0, 0, 0.2);
+                        border-radius: -3px solid rgba(0, 0, 0, 0.2);
+                        box-shadow: 0 4px 10px rgba(0,0,0,.2);
+                        background-color: white;
+                    }
+                    .tt-suggestion {
+
+                        padding: 15px 6px;
+                        font-size: 12px;
+                        line-height: 0px;
+                        cursor: pointer;
+                        display: block;
+                        text-align: left;
+                        border-bottom: 1px solid #ece6e6;
+                    }
+                    .tt-suggestion:hover {
+                        color: #f0f0f0;
+                        background-color: #0097cf;
+                    }
+
+                    .tt-suggestion p {
+                        margin: 0;
+                    }
+
+                                        #overlay {
+                        position: fixed;
+                        display: none;
+                        width: 100%;
+                        height: 100%;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        background-color: rgba(0,0,0,0.5);
+                        z-index: 2;
+                        cursor: pointer;
+                    }
+
+                    #text{
+                        position: absolute;
+                        width: 100%;
+                        height: 100%
+                        top: 50%;
+                        left: 50%;
+                        font-size: 100px;
+                        color: white;
+                        transform: translate(-50%,155%);
+                        -ms-transform: translate(-50%,50%);
+                    }
+                    #about_btn {
+                        background-color: #17a2b8;
+                        }
+                    .js-typeahead.form-control {
+
+                        border-style: solid;
+                        border-color: #92a8d1;
+
+                    }
+                    .ol-zoom {
+                        display: none;
+                        }
+
+                    .sidebar.full-sidebar .sidebar-toggle {
+
+                            background-color: #E6C200;
+                            color: black;
+
+                    }
+                    .sidebar.full-sidebar {
+ 
+                        bottom: -47px;
+                    }
+                    .nav-tabs {
+                         cursor: pointer;
+
+                        }   
+
+                    .sidebar.sm-sidebar{width: 300px;}
+                            .navbar{background: #ededed;border-bottom: 1px solid #ccc;}
+                            .custom-select{
+                                border:0;
+                                border-bottom: 2px solid rgba(0,0,0,.1);
+                            }
+                            /*.custom-select{border-radius: 30px;padding: 0 10px;background: none;text-align: center; margin: 0 5px; cursor: pointer;}*/
+                            .filter{padding: 10px 10px; text-align: center; background: #fff; position: relative;z-index: 1011; box-shadow: 0 5px 5px rgba(0,0,0,0.2); -webkit-box-shadow: 0 5px 5px rgba(0,0,0,0.2);}
+                            .form-inline{display: inherit;}
+                            .btn-group button {
+                            /*background-color: #4CAF50; 
+                            color: white; /* White text */
+                            padding: 7px 24px; /* Some padding */
+                            /*border:none;*/
+                            /*width: 50%;*/ /* Set a width if needed */
+                            display: block; /* Make the buttons appear below each other */
+
+                        }
+                        /*.select2-container{width: auto!important;}*/
+                        .btn {
+                        padding: 7px 24px;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        margin-left: 10px;
+                    }
+                        .btn-group button:first-child{
+                            border-top-left-radius: 5px;
+                            border-bottom-left-radius: 5px;
+                            margin-left: 5px;
+                            padding-right: 15px;
+                        }
+
+                        .btn-group button:last-child {
+                            border-top-right-radius: 5px;
+                            border-bottom-right-radius: 5px;
+                            /*background: #c62127;*/
+                            padding-left: 15px;
+                        }
+                        .input-group-prepend .btn, .input-group-append .btn{border-radius: 3px;margin:0;padding: 0px 13px;background: #fff; color: #333;} 
+
+                        /* Add a background color on hover */
+                        .btn-group button:hover {
+                            opacity: 0.9;
+                        }
+                        .center_align {
+                      text-align:center;
+                      width: 100%;
+                      text-align-last:center;
+                    }
+                    select:-moz-focusring {
+                      color: transparent;
+                      text-shadow: 0 0 0 #000;
+                    }
+
+                       
+                    .tabbing{margin-left: 54px;margin-top: -80px;}
+                    .nav-tabs{width:50px;border-radius: 4px;overflow: hidden; border: 1px solid rgb(206, 190, 128);
+                -webkit-background-clip: padding-box; /* for Safari */
+                background-clip: padding-box;}
+                .sb-top-right{background: #ededed;}
+                .bar {
+                        fill: #4f83a4;
+                    }
+                    
+                    .axis {
+                        font-size: 13px;
+                    }
+                    
+                    .axis path,
+                    .axis line {
+                        fill: none;
+                        display: none;
+                    }
+                    
+                    .label {
+                        font-size: 13px;
+                    }
+                    .holders{
+                    padding: .8rem;
+                    /*box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+                    -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);*/
+                    background: #FFF;
+                    margin: .8rem;
+                    }
+                    .holders:last-child{box-shadow: none;}
+                    .handal{position: absolute; top: 150px; left: 13px;}
+                    .handal.nav-tabs{background: #fff;}
+                    .nav-link {
+                        padding: .6rem .8rem;
+                        cursor: pointer;
+                    }
+                    .nav-fill .nav-item{border-bottom: 1px solid rgb(168, 145, 56);
+                    }
+                .nav-tabs .nav-link {
+                    color: #181711;
+                }
+                    .sidebar.full-sidebar .sidebar-toggle span {
+
+                    font-size: 15px;
+                    font-weight: bold;
+
+                }
+
+              
+                #myDiv {
+                  /*display: none;*/
+                  text-align: center;
+                }   
+
+                .layer-switcher{
+
+                    right:200px;
+                }  
+
+                   .noUi-handle-upper{
+                        display:none;
+                   }
+               .sidebar.full-sidebar .sidebar-toggle {
+
+                width: auto;
+                height: 40px;
+                padding: .2rem 1rem;
+                display: table;
+                line-height: 0px;
+            }
+                ./*sidebar.full-sidebar.active {
+
+                bottom: 0;
+
+            }*/
+            #map-canvas {
+                margin: 0;
+                padding: 0;
+                height: 400px;
+                max-width: none;
+            }
+            #map-canvas img {
+                max-width: none !important;
+            }
+            .gm-style-iw {
+                width: 350px !important;
+                top: 15px !important;
+                left: 0px !important;
+                background-color: #fff;
+                box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+                border: 1px solid rgba(72, 181, 233, 0.6);
+                border-radius: 2px 2px 10px 10px;
+            }
+            #iw-container {
+            /*background-color: #a89138;*/
+             background: white;
+             margin: 10px;                
+
+            }
+            .iw-source {
+
+                color: black;
+                text-align: left;
+                margin-right: 9px;
+                font-family: 'Open Sans Condensed', sans-serif;
+                font-size: 11px;
+                padding-left: 1em;
+                line-height: 29px;
+
+            }
+            #iw-container .iw-title {
+                font-family: 'Open Sans Condensed', sans-serif;
+
+            font-size: 14px;
+
+            font-weight: 400;
+
+            padding: 10px;
+
+            background-color: white;
+
+            margin: 0;
+
+            border-radius: 2px 2px 0 0;
+
+            color: black;
+            }
+            #iw-container .iw-content {
+                font-size: 13px;
+                line-height: 18px;
+                font-weight: 400;
+                margin-right: 1px;
+                padding: 15px 5px 20px 15px;
+                overflow-y: auto;
+                overflow-x: hidden;
+
+            }
+            .iw-content img {
+                float: right;
+                margin: 0 5px 5px 10px; 
+            }
+            .iw-subTitle {
+                font-size: 16px;
+                font-weight: 700;
+                padding: 5px 0;
+            }
+            .iw-bottom-gradient {
+                position: absolute;
+                width: 326px;
+                height: 25px;
+                bottom: 10px;
+                right: 18px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+            }
+                .filter {
+                -webkit-box-shadow: 0 2px 5px rgb(142, 129, 51)
+                    }
+
+             .noUi-horizontal .noUi-handle {
+
+                right: -9px !important;
+                width: 20px;
+
+                height: 22px;
+            }
+            .noUi-horizontal {
+
+                height: 10px;
+
+            }
+
+            .noUi-handle::after, .noUi-handle::before {
+
+                content: "";
+                display: block;
+                position: absolute;
+                height: 10px;
+                width: 1px;
+                background: #924747;
+                left: 7px;
+                top: 4px;
+
+            }
+            .noUi-handle::after {
+
+                left: 10px;
+
+            }
+            .noUi-connect{
+                background: #3FB8AF;
+            }
+            .noUi-tooltip {
+                padding:4px;
+                font-size:12px;
+            }
+            .dropdown-menu.show {
+
+                display: block;
+                max-height: 400px;
+                min-height: 100px;
+                overflow-y: scroll;
+
+            }
+
+      .ol-popup {
+        position: absolute;
+        background-color: white;
+        -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+        padding: 15px;
+        border-radius: 10px;
+        border: 1px solid #cccccc;
+        bottom: 12px;
+        left: -85px;
+        min-width: 197px;
+      }
+      .ol-popup:after, .ol-popup:before {
+        top: 100%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+      .ol-popup:after {
+        border-top-color: white;
+        border-width: 10px;
+        left: 87px;
+        margin-left: -10px;
+      }
+      .ol-popup:before {
+        border-top-color: #cccccc;
+        border-width: 11px;
+        left: 87px;
+        margin-left: -11px;
+      }
+      .ol-popup-closer {
+        text-decoration: none;
+        position: absolute;
+        top: 2px;
+        right: 8px;
+      }
+      .ol-popup-closer:after {
+        content: "✖";
+      }
+    
+            
+            
+                   </style>
+        <style type="text/css">
+            td > a {
+                color: black;
+            }
+            .bg-s-blue{
+                background-color: #16a696 !important;
+                }
+                .custom-popup-header {
+                        color: #3590f3;
+                        border-bottom: 1px solid #ccc;
+                    }
+                    #apply_button {
+                        padding: 6px 11px;
+                    }
+                    #clear1{
+                      padding: 6px 11px;  
+                    }
+                    .checkbox {
+                        float: left;
+                    }
+                    .multiselect.dropdown-toggle.btn.btn-default {
+                        font-size: 12px;
+                        margin-left: -3px;
+                    }
+                    .districtSelect {
+                        top: 104px !important; 
+                        left: -25px !important;
+                    }
+                    #statusSelect{    
+                        display: none;
+
+                    }
+                    #inputProvince{    
+                        display: none;
+
+                    }
+                    #inputDistrict{    
+                        display: none;
+                    }
+                    #inputLocalGovernment{    
+                        display: none;
+
+                    }
+                    #capacitySelect{
+                        display: none;
+                    }
+                   .multiselect-container>li>a>label {
+                         padding: 4px 20px 3px 20px;
+                         color:black;
+                    }       
+                    .modal-backdrop {
+                        z-index: 3;
+                    }
+                    .form-control{
+                        border: 0;
+                        border-bottom: 2px solid rgba(0,0,0,.1);
+                    }
+                    .header-bg{
+                        top: auto;
+                        bottom: 0;
+                    }
+                    #loader {
+                  position: absolute;
+                  left: 50%;
+                  top: 55%;
+                  z-index: 9999999;
+                 /* width: 150px;
+                  height: 150px;*/
+                  margin: -75px 0 0 -75px;
+                  border: 7px solid #f3f3f3;
+                  border-radius: 50%;
+
+                  border-top: 7px solid #8e8133;
+                  width: 38px;
+                  height: 38px;
+                  -webkit-animation: spin 2s linear infinite;
+                  animation: spin 2s linear infinite;
+              }
+
+              @-webkit-keyframes spin {
+                  0% { -webkit-transform: rotate(0deg); }
+                  100% { -webkit-transform: rotate(360deg); }
+              }
+
+              @keyframes spin {
+                  0% { transform: rotate(0deg); }
+                  100% { transform: rotate(360deg); }
+              }
+
+              /* Add animation to "page content" */
+              .animate-bottom {
+                  position: relative;
+                  -webkit-animation-name: animatebottom;
+                  -webkit-animation-duration: 1s;
+                  animation-name: animatebottom;
+                  animation-duration: 1s
+              }
+
+              @-webkit-keyframes animatebottom {
+                  from { bottom:-100px; opacity:0 } 
+                  to { bottom:0px; opacity:1 }
+              }
+
+              @keyframes animatebottom { 
+                  from{ bottom:-100px; opacity:0 } 
+                  to{ bottom:0; opacity:1 }
+              }
+              .dataTables_filter{
+                display: inline-flex;
+                float: right;
+              }
+        </style>
+    </head>
+    <body class="page-dataset">
+      <div id="loader"></div>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header id="app-header" class="bs-2">
+            <nav class="navbar navbar-expand-lg navbar-light">
+            <a>Nepal</a>
+                <a class="navbar-brand text-left" href="{% url 'home' %}">
+                    <!-- <img src="{% static 'assets/img/hydroicon.png' %}" alt="" height="35"> -->
+                    <span><strong>Hydropower</strong><br/>Portal</span>
+                </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="http://staging.nitifoundation.org/">Home</a>
+                </li><li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Map</a>
+                </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Datasets</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:about' %}">About</a>
+                </li>
+                </ul>
+              </div>
+            </nav>
+        </header>
+        
+        <div id="main-container">
+            <div class="page-header p-0 mb-3">
+                <div class="header-bg bg-s-blue">
+                    <img src="{% static 'assets/img/img-bg.jpg' %}">
+                </div>
+                <div class="container">
+                        <!-- <select class="select2" name="state" id="inputHydropower">
+                            
+                            <option>All Hydropower</option>
+                            {% for hydro in hydropower %}
+                            <option>{{ hydro.project }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="dropdown">
+                            <button class="btn btn-light position-relative dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Filter Option
+                            </button>
+                            <div class="dropdown-menu padding fw-dd" aria-labelledby="dropdownMenuButton">
+                                <div class="row">
+                                    <div class="col-md-4 col-lg-3">
+                                        <div class="widget-wrap">
+                                            <div class="widget-header">
+                                                <h6>Region</h6>
+                                            </div>
+                                            <div class="widget-section">
+                                                <div class="form-group">
+                                                    <label for="inputProvince">Province</label>
+                                                    <select class="custom-select center_align" name="state" id="inputProvince">
+                                                      <option>Choose</option>
+                                                      {% for province in provinces %}
+                                                      <option>{{ province }}</option>
+                                                      {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputDistrict">District</label>
+                                                    <select class="custom-select center_align" name="district" id="inputDistrict">
+                                                        <option>Choose</option>
+                                                        {% for district in districts %}
+                                                        <option>{{ district }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="inputLocalGovernment">Local Government</label>
+                                                    <select class="custom-select center_align" name="localgovernment" id="inputLocalGovernment">
+                                                        <option>Choose</option>
+                                                        {% for gapanapa in gapanapas %}
+                                                        <option>{{ gapanapa }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3">
+                                        <div class="widget-wrap">
+                                            <div class="widget-header">
+                                                <h6>Status</h6>
+                                            </div>
+                                            <div class="widget-section">
+                                                <ul class="toggle-list">
+                                                    <li>
+                                                        <span>Survey</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <span>Generation</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <span>Operation</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3">
+                                        <div class="widget-wrap">
+                                            <div class="widget-header">
+                                                <h6>Capacity</h6>
+                                            </div>
+                                            <div class="widget-section">
+                                                <ul class="toggle-list">
+                                                    <li>
+                                                        <span>Less than 20mw</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <span>Between 20-100mw</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                    <li>
+                                                        <span>Greater than 100mw</span>
+                                                        <label class="switch switch-xxs">
+                                                            <input type="checkbox">
+                                                            <span class="slider"></span>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 col-lg-3">
+                                        <button type="button" class="btn btn-block btn-primary mt-3">Apply</button>
+                                        <button type="button" class="btn btn-block btn-default mt-3">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    <div class="row text-white">
+                        <div class="col-md-4">
+                            <div class="jumbo-wrap">
+                                <div id=hydro_count class="count">{{hydropower_count}}</div>
+                                Hydropowers
+                            </div>
+                            <p>
+                                This project has determined the nature and scope to database and information to be disseminate through the interactive hydro map.
+                            </p>
+                        </div>
+                        <div id="ChartContainer" class="col-md-8">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+             <div class="filter">
+                <form class="form-inline" id="example-reset-form">
+                <!-- <form id="example-reset-form" class="form-inline" role="form"> -->
+
+            <select id="inputProvince" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                  <option id="1">Province 1</option>
+                  <option id="2">Province 2</option>
+                  <option id="3">Province 3</option>
+                  <option id="4">Province 4</option>
+                  <option id="5">Province 5</option>
+                  <option id="6">Province 6</option>
+                  <option id="7">Province 7</option>
+            </select>
+
+
+            <select id="inputDistrict" class="multi-checkbox" multiple="multiple" autocomplete="off">                   
+                    <option>ARGHAKHANCHI</option>
+                    
+                    <option>BAGLUNG</option>
+                    
+                    <option>BAITADI</option>
+                    
+                    <option>BAJHANG</option>
+                    
+                    <option>BAJURA</option>
+                    
+                    <option>BHOJPUR</option>
+                    
+                    <option>CHITAWAN</option>
+                    
+                    <option>DAILEKH</option>
+                    
+                    <option>DARCHULA</option>
+                    
+                    <option>DHADING</option>
+                    
+                    <option>DOLAKHA</option>
+                    
+                    <option>DOLPA</option>
+                    
+                    <option>DOTI</option>
+                    
+                    <option>GORKHA</option>
+                    
+                    <option>GULMI</option>
+                    
+                    <option>HUMLA</option>
+                    
+                    <option>ILAM</option>
+                    
+                    <option>JAJARKOT</option>
+                    
+                    <option>JUMLA</option>
+                    
+                    <option>KABHREPALANCHOK</option>
+                    
+                    <option>KAILALI</option>
+                    
+                    <option>KALIKOT</option>
+                    
+                    <option>KAPILBASTU</option>
+                    
+                    <option>KASKI</option>
+                    
+                    <option>KHOTANG</option>
+                    
+                    <option>LALITPUR</option>
+                    
+                    <option>LAMJUNG</option>
+                    
+                    <option>MAKAWANPUR</option>
+                    
+                    <option>MANANG</option>
+                    
+                    <option>MORANG</option>
+                    
+                    <option>MUGU</option>
+                    
+                    <option>MUSTANG</option>
+                    
+                    <option>MYAGDI</option>
+                    
+                    <option>NAWALPARASI_E</option>
+                    
+                    <option>NAWALPARASI_W</option>
+                    
+                    <option>NUWAKOT</option>
+                    
+                    <option>OKHALDHUNGA</option>
+                    
+                    <option>PALPA</option>
+                    
+                    <option>PANCHTHAR</option>
+                    
+                    <option>PARBAT</option>
+                    
+                    <option>PYUTHAN</option>
+                    
+                    <option>RAMECHHAP</option>
+                    
+                    <option>RASUWA</option>
+                    
+                    <option>ROLPA</option>
+                    
+                    <option>RUKUM_E</option>
+                    
+                    <option>RUKUM_W</option>
+                    
+                    <option>RUPANDEHI</option>
+                    
+                    <option>SANKHUWASABHA</option>
+                    
+                    <option>SINDHUPALCHOK</option>
+                    
+                    <option>SOLUKHUMBU</option>
+                    
+                    <option>SURKHET</option>
+                    
+                    <option>SYANGJA</option>
+                    
+                    <option>TANAHU</option>
+                    
+                    <option>TAPLEJUNG</option>
+                    
+                    <option>TERHATHUM</option>
+                                                                    
+             </select>
+
+            <select id="inputLocalGovernment" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                <option>Aarughat</option>
+                                                                
+                            <option>Aathbiskot</option>
+                            
+                            <option>Aathrai</option>
+                            
+                            <option>Aathrai Tribeni</option>
+                            
+                            <option>Ajirkot</option>
+                            
+                            <option>Anbukhaireni</option>
+                            
+                            <option>Annapurna</option>
+                            
+                            <option>Annapurna</option>
+                            
+                            <option>Apihimal</option>
+                            
+                            <option>Badigad</option>
+                            
+                            <option>Bagmati</option>
+                            
+                            <option>Bagmati</option>
+                            
+                            <option>Bagnaskali</option>
+                            
+                            <option>Baiteshwor</option>
+                            
+                            <option>Balefi</option>
+                            
+                            <option>Barahtal</option>
+                            
+                            <option>Barhabise</option>
+                            
+                            <option>Beni</option>
+                            
+                            <option>Besishahar</option>
+                            
+                            <option>Bethanchowk</option>
+                            
+                            <option>Bharatpur</option>
+                            
+                            <option>Bhimeshwor</option>
+                            
+                            <option>Bhimphedi</option>
+                            
+                            <option>Bhotekoshi</option>
+                            
+                            <option>Bhotkhola</option>
+                            
+                            <option>Bhume</option>
+                            
+                            <option>Bidur</option>
+                            
+                            <option>Bigu</option>
+                            
+                            <option>Binayee Tribeni</option>
+                            
+                            <option>Bithadchir</option>
+                            
+                            <option>Buddhabhumi</option>
+                            
+                            <option>Budhiganga</option>
+                            
+                            <option>Bungal</option>
+                            
+                            <option>Butwal</option>
+                            
+                            <option>Chainpur</option>
+                            
+                            <option>Chandrakot</option>
+                            
+                            <option>Chaukune</option>
+                            
+                            <option>Chautara SangachokGadhi</option>
+                            
+                            <option>Chhathar</option>
+                            
+                            <option>Chichila</option>
+                            
+                            <option>Chum Nubri</option>
+                            
+                            <option>Chure</option>
+                            
+                            <option>Deumai</option>
+                            
+                            <option>Dharche</option>
+                            
+                            <option>Dharmadevi</option>
+                            
+                            <option>Dhaulagiri</option>
+                            
+                            <option>Dhorpatan</option>
+                            
+                            <option>Dilasaini</option>
+                            
+                            <option>Diprung</option>
+                            
+                            <option>Doramba</option>
+                            
+                            <option>Dordi</option>
+                            
+                            <option>Dudhkoshi</option>
+                            
+                            <option>Dudhpokhari</option>
+                            
+                            <option>Dupcheshwar</option>
+                            
+                            <option>Falelung</option>
+                            
+                            <option>Gaidakot</option>
+                            
+                            <option>Gajuri</option>
+                            
+                            <option>Galchi</option>
+                            
+                            <option>Galkot</option>
+                            
+                            <option>Galyang</option>
+                            
+                            <option>Gangajamuna</option>
+                            
+                            <option>Gaumukhi</option>
+                            
+                            <option>Gaumul</option>
+                            
+                            <option>Gaurishankar</option>
+                            
+                            <option>Ghiring</option>
+                            
+                            <option>Gokulganga</option>
+                            
+                            <option>Gosaikunda</option>
+                            
+                            <option>Gurans</option>
+                            
+                            <option>Helambu</option>
+                            
+                            <option>Hetauda</option>
+                            
+                            <option>Hilihang</option>
+                            
+                            <option>Himali</option>
+                            
+                            <option>Ichchhyakamana</option>
+                            
+                            <option>Illam</option>
+                            
+                            <option>Indrawati</option>
+                            
+                            <option>Jaimuni</option>
+                            
+                            <option>Jaljala</option>
+                            
+                            <option>JayaPrithivi</option>
+                            
+                            <option>Jiri</option>
+                            
+                            <option>Jugal</option>
+                            
+                            <option>Kaike</option>
+                            
+                            <option>Kaligandaki</option>
+                            
+                            <option>Kalika</option>
+                            
+                            <option>Kalinchok</option>
+                            
+                            <option>Kepilasagadhi</option>
+                            
+                            <option>Kerabari</option>
+                            
+                            <option>Khandbari</option>
+                            
+                            <option>Khaniyabash</option>
+                            
+                            <option>Khaptadchhanna</option>
+                            
+                            <option>Khatyad</option>
+                            
+                            <option>Khijidemba</option>
+                            
+                            <option>Khumbupasanglahmu</option>
+                            
+                            <option>Kispang</option>
+                            
+                            <option>Kushma</option>
+                            
+                            <option>Kwholasothar</option>
+                            
+                            <option>Lamidanda</option>
+                            
+                            <option>Letang</option>
+                            
+                            <option>Likhu</option>
+                            
+                            <option>Likhupike</option>
+                            
+                            <option>Machhapuchchhre</option>
+                            
+                            <option>Madhyabindu</option>
+                            
+                            <option>MadhyaNepal</option>
+                            
+                            <option>Madi</option>
+                            
+                            <option>Madi</option>
+                            
+                            <option>Mahakulung</option>
+                            
+                            <option>Mahawai</option>
+                            
+                            <option>Mai</option>
+                            
+                            <option>Maiwakhola</option>
+                            
+                            <option>Makalu</option>
+                            
+                            <option>Malika</option>
+                            
+                            <option>Malika</option>
+                            
+                            <option>Mandavi</option>
+                            
+                            <option>Manthali</option>
+                            
+                            <option>Marma</option>
+                            
+                            <option>Marsyangdi</option>
+                            
+                            <option>Masta</option>
+                            
+                            <option>Meghang</option>
+                            
+                            <option>Melamchi</option>
+                            
+                            <option>Meringden</option>
+                            
+                            <option>Mikwakhola</option>
+                            
+                            <option>Modi</option>
+                            
+                            <option>Molung</option>
+                            
+                            <option>Musikot</option>
+                            
+                            <option>Musikot</option>
+                            
+                            <option>Myanglung</option>
+                            
+                            <option>Narphu</option>
+                            
+                            <option>Nashong</option>
+                            
+                            <option>Naubahini</option>
+                            
+                            <option>Naugad</option>
+                            
+                            <option>Naukunda</option>
+                            
+                            <option>Naumule</option>
+                            
+                            <option>Nechasalyan</option>
+                            
+                            <option>Neshyang</option>
+                            
+                            <option>Netrawati</option>
+                            
+                            <option>Nisikhola</option>
+                            
+                            <option>Panchakanya</option>
+                            
+                            <option>Pandav Gupha</option>
+                            
+                            <option>Parbati Kunda</option>
+                            
+                            <option>Phaktanglung</option>
+                            
+                            <option>Phalebas</option>
+                            
+                            <option>Phidim</option>
+                            
+                            <option>Phungling</option>
+                            
+                            <option>Pokhara Lekhnath</option>
+                            
+                            <option>Pratappur</option>
+                            
+                            <option>Purbichauki</option>
+                            
+                            <option>Putha Uttarganga</option>
+                            
+                            <option>Raghuganga</option>
+                            
+                            <option>Rainadevi Chhahara</option>
+                            
+                            <option>Rainas</option>
+                            
+                            <option>Raksirang</option>
+                            
+                            <option>Rambha</option>
+                            
+                            <option>Ramechhap</option>
+                            
+                            <option>Ramprasad Rai</option>
+                            
+                            <option>Ribdikot</option>
+                            
+                            <option>Rong</option>
+                            
+                            <option>Rubi Valley</option>
+                            
+                            <option>Rupa</option>
+                            
+                            <option>Rupakot Majhuwagadhi</option>
+                            
+                            <option>Sabhapokhari</option>
+                            
+                            <option>Sahid Lakhan</option>
+                            
+                            <option>Sailung</option>
+                            
+                            <option>Salpasilichho</option>
+                            
+                            <option>Sandakpur</option>
+                            
+                            <option>Sani Bheri</option>
+                            
+                            <option>Sanni Tribeni</option>
+                            
+                            <option>Sarkegad</option>
+                            
+                            <option>Satyawati</option>
+                            
+                            <option>Shadananda</option>
+                            
+                            <option>Shailyashikhar</option>
+                            
+                            <option>Shuklagandaki</option>
+                            
+                            <option>Siddhalek</option>
+                            
+                            <option>Sidingba</option>
+                            
+                            <option>Silichong</option>
+                            
+                            <option>Simta</option>
+                            
+                            <option>Siranchok</option>
+                            
+                            <option>Sirijangha</option>
+                            
+                            <option>Sisne</option>
+                            
+                            <option>Sitganga</option>
+                            
+                            <option>Solududhakunda</option>
+                            
+                            <option>Soru</option>
+                            
+                            <option>Sotang</option>
+                            
+                            <option>Sulikot</option>
+                            
+                            <option>Sunchhahari</option>
+                            
+                            <option>Sundarbazar</option>
+                            
+                            <option>Sunkoshi</option>
+                            
+                            <option>Sunkoshi</option>
+                            
+                            <option>Surma</option>
+                            
+                            <option>Suryagadhi</option>
+                            
+                            <option>Suryodaya</option>
+                            
+                            <option>Tamakoshi</option>
+                            
+                            <option>Tara Khola</option>
+                            
+                            <option>Tatopani</option>
+                            
+                            <option>Thalara</option>
+                            
+                            <option>Thasang</option>
+                            
+                            <option>Tinau</option>
+                            
+                            <option>Tribeni</option>
+                            
+                            <option>Tribeni Nalagad</option>
+                            
+                            <option>Tripurasundari</option>
+                            
+                            <option>Tripura Sundari</option>
+                            
+                            <option>Tyamkemaiyung</option>
+                            
+                            <option>Umakunda</option>
+                            
+                            <option>Uttargaya</option>
+                            
+                            <option>Yangwarak</option>
+                            
+                            <option>Yangwarak</option>
+
+            </select>
+             <!--    <select id="statusSelect" name="cars" class="custom-select" autocomplete="off">
+                    <option selected>Status</option>
+                    <option class = "projectStatus" value = "Survey">Survey</option>
+                    <option class = "projectStatus" value = "Generation">Generation</option>
+                    <option class = "projectStatus" value = "Operation">Operation</option>
+                </select> -->
+                <select id="statusSelect" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                    <option class = "projectStatus" value = "Survey">Survey</option>
+                    <option class = "projectStatus" value = "Generation">Generation</option>
+                    <option class = "projectStatus" value = "Operation">Operation</option>
+
+                </select>
+
+                <!-- <select id="capacitySelect" name="cars" class="custom-select" autocomplete="off">
+                    <option selected>Capacity</option>
+                    <option class = "projectCapacity" value = "0_20">Less than 20mw</option>
+                    <option class = "projectCapacity" value = "20_100">Between 20-100mw</option>
+                    <option class = "projectCapacity" value = "100_20000">Greater than 100mw</option>
+                    </input>
+                </select> -->
+
+                <select id="capacitySelect" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                    <div class="container">
+                      <div class="row">
+                       <option class = "projectCapacity" value = "0_20">Less than 20mw</option>
+                    <option class = "projectCapacity" value = "20_100">Between 20-100mw</option>
+                    <option class = "projectCapacity" value = "100_20000">Greater than 100mw</option>
+                      </div>
+                    </div>   
+                </select>
+<!-- <input type="button" id="btnget" value="Get Selected Values" /> -->
+                <div class="btn-group">
+                        <button id = "apply_button" type="button" class="btn btn-outline-primary"><i class="la la-check"></i> Apply</button>
+                        <button id="clear1" type="reset" class="btn btn-outline-primary"><i class="la la-close"></i> Clear </button>
+                         
+                </div>
+                    
+                     <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog modal-lg">
+
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Open Hydroportal-Niti Foundation</h4>
+            </div>
+            <div class="modal-body">
+              <p>Description.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                     <!-- <div id="overlay" onclick="offbtn()">
+                         <div id="text">NITI FOUNDATION @NAXA </div>
+                    </div>              -->
+
+                </form>
+            </div>
+            <div class="container mb-3 pb-3 bg-white">
+                <div class="table-responsive">
+                    <table id="hydropower" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Project</th>                            
+                            <th>Province</th>
+                            <th>District</th>
+                            <th>Municipality</th>                            
+                            <th>Capacity (MW)</th>
+                            <th>River</th>
+                            <th>Lic No</th>
+                            <th>Isuue Date</th>
+                            <th>Validity</th>
+                            <th>Promoter</th>
+                            <th>Address</th>
+                            <th>Longitude</th>
+                            <th>Latitude</th>
+                            <th>License Type</th>
+                            <th>Date of Operation</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for hydro in hydropower%}
+                        <tr>
+                            <td><a href="{% url 'core:hydropower_profile' hydro.id %}">{{hydro.project}}</td>
+                            <td>{{hydro.province}}</td>
+                            <td>{{hydro.district}}</td>
+                            <td>{{hydro.gapanapa}}</td>
+                            <td>{{hydro.capacity}}</td>
+                            <td>{{hydro.river}}</td>
+                            <td>{{hydro.lic_number}}</td>
+                            <td>{{hydro.issue_date}}</td>
+                            <td>{{hydro.validity}}</td>
+                            <td>{{hydro.promoter}}</td>
+                            <td>{{hydro.address}}</td>
+                            <td>{{hydro.longitude}}</td>
+                            <td>{{hydro.latitude}}</td>
+                            <td>{{hydro.license_type}}</td>
+                            <td>{{hydro.date_of_operation}}</td>                     
+                            <td><a href="{% url 'core:hydropower_profile' hydro.id %}" title="" class="btn btn-outline-primary btn-sm">Detail <i class="la la-caret-right"></i></a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.2.1.min.js"><\/script>')</script>-->
+        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery-3.2.1.min.js' %}"><\/script>')</script>
+		<script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+
+      
+
+        <script src="{% static 'assets/js/vendor/Chart.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'assets/js/dataTables.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'assets/js/buttons.bootstrap4.min.js' %}"></script>
+    
+            <script src="{% static 'assets/js/buttons.html5.min.js' %}"></script>
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.38/pdfmake.js"></script> -->
+            <script src="{% static 'assets/js/pdfmake.min.js' %}"></script>
+            <script src="{% static 'assets/js/vfs_fonts.js' %}"></script>
+            <script src="{% static 'assets/js/buttons.print.min.js' %}"></script>
+            <script src="{% static 'assets/js/buttons.flash.min.js' %}"></script>
+            <script src="{% static 'assets/js/jszip.min.js' %}"></script>
+
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script> -->
+        
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+        <script src="{% static 'assets/js/bootstrap-multiselect.js' %}"></script> 
+
+        <script>
+        //     $('#hydropower').DataTable(
+        //         {
+        //             buttons: [
+        //     'copy', 'csv', 'excel', 'pdf', 'print'
+        // ]
+        //         });
+        var table = $('#hydropower').DataTable({
+    dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 
+           { extend: 'pdf',
+        footer: 'true',
+        orientation: 'landscape',
+        title:'Niti Datasets',
+        text: 'PDF',
+        exportOptions: {
+        modifier: {
+        selected: true
+                        }
+                    }
+            }    
+        ],
+  });
+            $(document).ready(function(){
+                $('#inputLocalGovernment').multiselect({
+
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select Local Government',
+
+                    });
+                    $('#inputDistrict').multiselect({
+
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select District',
+
+                    });
+                    $('#inputProvince').multiselect({
+
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select Province',
+
+                    });
+
+                    $('#capacitySelect').multiselect({
+
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select Capacity',
+
+                    });
+                    $('#statusSelect').multiselect({
+
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'Select Status',
+
+                    });
+
+                //district function to change in options
+$.getJSON("http://hydro.naxa.com.np/api/district/", function(dist) {
+    $.getJSON("http://hydro.naxa.com.np/api/gapanapa/", function(gapanapa) {
+        distValue = [];
+        gapanapavalue = [];
+
+        function loadDistrictList(dist) {
+            // console.log(dist.length);
+
+            for (var i = 0; i < dist.length; i++) {
+
+                distValue.push({
+                    "label": dist[i].name
+                });
+
+            }
+
+            return distValue;
+        }
+
+        function loadMunicipalList(gapanapa) {
+            // console.log(gapanapa.length);
+
+            for (var i = 0; i < gapanapa.length; i++) {
+
+                gapanapavalue.push({
+                    "label": gapanapa[i].name
+                });
+
+            }
+
+            return gapanapavalue;
+        }
+
+
+        var distValues = loadDistrictList(dist);
+        var gapanapavalue = loadMunicipalList(gapanapa);
+        // console.log(distValues);
+        $("#inputDistrict").multiselect("dataprovider", distValue);
+        $("#inputLocalGovernment").multiselect("dataprovider", gapanapavalue);
+
+        // DISTRICT DATA CHANGE ON CLICK ON MULTI CHECKBOX START
+        function prepareDistData(province_id, districtArray, municipalArray, districtCount, district_val, munCount, municipal_val) {
+
+            for (var i = 0; i < province_id.length; i++) {
+                for (var j = 0; j < districtCount; j++) {
+                    if (province_id.length != 0 && districtArray[j].province == province_id[i]) {
+
+                        district_val.push({
+                            "label": districtArray[j].name
+                        })
+                    } else {
+
+                    }
+
+                }
+
+                for (var k = 0; k < munCount; k++) {
+                    if (province_id.length != 0 && municipalArray[k].province == province_id[i]) {
+
+                        municipal_val.push({
+                            "label": municipalArray[k].name
+                        })
+
+                    }
+                }
+            }
+
+        }
+        // DISTRICT DATA CHANGE ON CLICK ON MULTI CHECKBOX END
+
+
+
+
+        // MUNICIPAL DATA CHANGE ON CLICK ON MULTI CHECKBOX START
+        function prepareMunicipalData(district_val, munCount, municipalArray, municipal_data) {
+            // console.log(municipalArray);
+            for (var l = 0; l < district_val.length; l++) {
+                for (var k = 0; k < munCount; k++) {
+
+                    if (district_val.length != 0 && municipalArray[k].district == district_val[l]) {
+
+                        municipal_data.push({
+                            "label": municipalArray[k].name
+                        })
+
+                    }
+
+                }
+
+            }
+            console.log(municipal_data);
+        }
+        // MUNICIPAL DATA CHANGE ON CLICK ON MULTI CHECKBOX END
+
+
+
+        var municipalArray = jQuery.extend(true, {}, gapanapa);
+        var munCount = Object.keys(municipalArray).length;
+
+        $('#inputProvince').on('change', function() {
+
+            var districtArray = jQuery.extend(true, {}, dist);
+            var districtCount = Object.keys(districtArray).length;
+
+
+            var province_id = $('#inputProvince').val();
+            district_val = [];
+            municipal_val = [];
+             const isInArray = province_id.includes("Province 2");
+            if(isInArray==true){
+                alert("Province 2 has No Hydropower");
+            }
+            if (province_id.length == 7 || province_id.length == 0) {
+
+
+                console.log(distValue);
+                $("#inputDistrict").multiselect("dataprovider", distValue);
+                $("#inputLocalGovernment").multiselect("dataprovider", gapanapavalue);
+            } else {
+                prepareDistData(province_id, districtArray, municipalArray, districtCount, district_val, munCount, municipal_val);
+                // console.log(district_val);
+                $("#inputDistrict").multiselect("dataprovider", district_val);
+                $("#inputLocalGovernment").multiselect("dataprovider", municipal_val);
+            }
+
+        });
+
+
+        $('#inputDistrict').on('change', function() {
+            // console.log("LOCAL GOV CHANGE");
+            var district_val = $('#inputDistrict').val();
+            // console.log(district_val);
+            municipal_data = [];
+            if (district_val.length == 55 || district_val.length == 0) {
+                $("#inputLocalGovernment").multiselect("dataprovider", gapanapavalue);
+            } else {
+                prepareMunicipalData(district_val, munCount, municipalArray, municipal_data);
+                $("#inputLocalGovernment").multiselect("dataprovider", municipal_data);
+            }
+        });
+
+        // function for getting district mun by clicking province END
+
+    });
+});
+                      var total_json = null;
+                      $.ajax({
+                              url: 'http://hydro.naxa.com.np/api/Hydropower/', //static_url+'assets/data/Hydropower_Sites.geojson',
+                              //data: {},
+                              async: false, //blocks window close
+                              success: function(data) {
+                                total_json = data;  
+
+                              }
+                          });
+
+                      function applyFilter(siteListArray, provinceValue, districtValue, munValue, choose_status, choose_capacity){
+
+            for(i = siteListArray.features.length-1; i>=0 ;i--){
+                   
+                    var regioncheck = 1;
+                    if(munValue.length>=1){
+                       
+                        for(var a = 0; a<munValue.length; a++){
+                          if(siteListArray.features[i].properties.gapanapa_name.trim().toLowerCase() == munValue[a].trim().toLowerCase()){
+                              regioncheck = 0;
+                              //regioncheck++;
+                          }
+                        }  
+                    }
+                    else if(districtValue.length>=1){
+                      // console.log(siteListArray.features[i].properties.district_name.trim().toLowerCase());
+                      // console.log(districtValue.trim().toLowerCase());
+                      // console.log("district selected"); 
+                      for(var b = 0; b<districtValue.length; b++){
+                        if(siteListArray.features[i].properties.district_name.trim().toLowerCase() == districtValue[b].trim().toLowerCase()){
+                            // console.log("district Entered");
+                              regioncheck = 0;
+                              //regioncheck++;
+                        }
+                      }  
+                    }
+                    else if(provinceValue.length>=1){ 
+                      
+                      //console.log("province selected"); 
+                      for(var c = 0; c<provinceValue.length; c++){
+                        if("province "+siteListArray.features[i].properties.province_name.trim().toLowerCase() == provinceValue[c].trim().toLowerCase() ){ 
+                       
+                              //console.log("here");
+                              regioncheck = 0;
+                              //regioncheck++;
+                              
+                        }
+                      }
+                    }
+                     else if(munValue.length == 0 && districtValue.length== 0 && provinceValue.length == 0){
+                    //   //console.log("dont delete this");
+                       regioncheck = 2;
+                     }
+                    
+                      //console.log(regioncheck);
+                    if(regioncheck == 1){
+                         // console.log("deleted");
+                        siteListArray.features.splice(i, 1);
+                    }
+                    
+                    else{
+                  //console.log(choose_status);
+                      if(choose_status.length >= 1){
+                      var status_matched = 1;
+                      for(var k = 0; k<choose_status.length; k++){
+
+                        if(siteListArray.features[i] != undefined){ //console.log(siteListArray.features[i].properties.license_type);
+                          //console.log(choose_status[k]);
+                          if(siteListArray.features[i].properties.license_type == choose_status[k]){ //console.log("status_entered");
+                            status_matched = 0;
+                            //console.log("inside if");
+                            //break;
+                            //console.log(progress[k]);
+                          }
+                          else{//console.log("status_not entered");
+                            status_matched++;
+                          }
+                        }
+                      }
+                      }
+                      if(status_matched >= choose_status.length){ //console.log("progress deleted");
+                        siteListArray.features.splice(i, 1);
+                      }
+
+                      else{
+                      
+                    // console.log(choose_capacity.length);
+                    if(choose_capacity.length >= 1){
+                    
+                    // console.log("varun")
+                      //console.log(form_status);
+                      var yes = 1;
+                      for(var l = 0; l<choose_capacity.length; l++){//console.log(form_status[i]);
+                          // console.log(choose_capacity[l]);
+                        capacity_max = parseInt(choose_capacity[l].split("_")[1]);
+                          capacity_min = parseInt(choose_capacity[l].split("_")[0]);
+                          // console.log(capacity_max);
+                          if(siteListArray.features[i] != undefined){ //console.log(siteListArray.features[i].properties.capacity);
+                            if(siteListArray.features[i].properties.capacity > capacity_min && siteListArray.features[i].properties.capacity <= capacity_max ){ //console.log("progress_entered");
+                              yes = 0;
+                            }
+                            else{ //console.log("progress_not_entered");
+                              yes++;
+                            }
+                          }
+                      }
+                      }
+                      if(yes >= choose_capacity.length){ //console.log("status deleted");
+                        siteListArray.features.splice(i, 1);
+                      }
+                    }  
+                    
+                  
+                  /*else {
+                    if(choose_status == "Site Progress"){
+                        //manage style
+                      }
+                    else{
+                        //manage style
+                    }
+                  }*/
+                  }
+                  
+                 
+                
+              }
+
+          }
+
+
+ChartData(total_json);
+$('#example-reset-form').on('reset', function() {
+                    $('.multi-checkbox option:selected').each(function() {
+                        $(this).prop('selected', false);
+                    })
+
+                    $('.multi-checkbox').multiselect('refresh');
+                });
+$(".clear1").on('click',function(){
+    $('#example-reset-form').trigger("reset");
+
+});
+                          //APPLY BUTTON Start
+          $("#apply_button").on('click',function(){
+
+            
+            var siteListArray = jQuery.extend(true, {}, total_json);
+          
+            // console.log(siteListArray);
+
+           // var provinceValue = $("#inputProvince").val();
+           // $(".lds-spinner").css("display","block");
+           var provinceValue= [];
+             if($("#inputProvince").val()!= null){
+               provinceValue = $("#inputProvince").val();
+              console.log(provinceValue);
+             }
+             // console.log(provinceValue);
+
+            var districtValue =[];
+             if($("#inputDistrict").val()!= null){
+               districtValue = $("#inputDistrict").val();
+              
+             }
+             console.log(districtValue);
+                      // console.log(districtValue);
+            var munValue = [];
+             if($("#inputLocalGovernment").val()!= null){
+               munValue = $("#inputLocalGovernment").val();
+              
+             }
+             console.log(munValue);
+
+
+            //console.log(districtValue);
+            //console.log(JSON.stringify(siteList));
+            
+            //console.log(choose_status);
+          
+            var choose_status= [];
+             if($("#statusSelect").val()!= null){
+               choose_status = $("#statusSelect").val();
+               // console.log(choose_status);
+
+             }
+
+            console.log(choose_status);
+            // $.each($("option[class='projectStatus']"), function(){
+            //   console.log($(this).parent().siblings().html());
+            //   choose_status.push($(this).parent().siblings().html());
+            // console.log($(".statusSelect").on('click',function()
+            //   {choose_status.push($(this).parent().siblings().html())}));
+            //           console.log(choose_status);
+
+            // });
+            // console.log(choose_status);
+            
+            // console.log(choose_capacity);
+            var choose_capacity=[];
+            // console.log($("#capacitySelect").val());
+               if($("#capacitySelect").val()!= null){
+                  choose_capacity=$("#capacitySelect").val();
+               }
+
+            console.log(choose_capacity);
+            // var choose_capacity =[$("#capacitySelect").val()];
+  // console.log(choose_capacity);
+  // console.log(choose_capacity);
+          // var choose_capacity = [];
+            // $.each($("input[class='projectCapacity']".val()), function(){
+            //   console.log($(this).parent().siblings().html());
+            //   choose_capacity.push($(this).val());
+            // });
+            // console.log(choose_capacity);
+          
+              
+              //console.log(multi_project)
+              
+              applyFilter(siteListArray, provinceValue, districtValue, munValue, choose_status, choose_capacity);
+              console.log(siteListArray.features.length);
+
+              ChartData(siteListArray);
+              CreateDataTable(siteListArray);
+
+              console.log($("#hydro_count").html(''+siteListArray.features.length+''));
+              $("#hydro_count").html(''+siteListArray.features.length+'');
+              //console.log(filtered_sites);
+              console.log("FILTERED DATA TO IMPLEMENT ON TABLE")
+              // $(".lds-spinner").css("display","none");
+                filterApplied = true;
+    // $("#loader").css("display","none");                
+    });
+
+//HYDROPOWER COUNT ON FILTER START//
+function CreateDataTable(siteListArray){
+
+              
+//HYDROPOWER COUNT ON FILTER END//
+
+//DATATABLE BY FILTER START//
+                
+              $('#hydropower').html('');
+              $('#hydropower').DataTable({
+                dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel',
+            {
+                extend: 'pdfHtml5',
+                orientation: 'landscape',
+                pageSize: 'LEGAL'
+            } 
+        ],
+                      // paging: false,
+                    // searching: false,
+                    destroy: true,
+                columns: [
+            { title: "Project"},
+            { title: "Address"},
+            { title: "Province"},
+            { title: "District"},
+            { title: "Municipality"},
+            { title: "Capacity"},
+            { title: "River"},
+            { title: "License No"},
+            { title: "Issued Date"},
+            { title: "Validity Date"},
+            { title: "Promoter"},
+            { title: "Longitude"},
+            { title: "Latitude"},
+            { title: "License_type"},
+            {title: "Link"}
+        ],
+
+    });
+              // var table = $('#hydropower').DataTable();
+              
+              for(var i=0; i<siteListArray.features.length; i++){
+              $('#hydropower').DataTable().row.add( [
+           '<a href="http://hydro.naxa.com.np/core/hydropower-profile/'+siteListArray.features[i].properties.pk+'" >'+ siteListArray.features[i].properties.project +'</a>',
+          siteListArray.features[i].properties.address ,
+            siteListArray.features[i].properties.province_name, 
+               siteListArray.features[i].properties.district_name ,
+               siteListArray.features[i].properties.gapanapa_name ,
+               siteListArray.features[i].properties.capacity ,
+               siteListArray.features[i].properties.river ,
+               siteListArray.features[i].properties.lic_number ,
+              siteListArray.features[i].properties.issue_date_years+'/'+siteListArray.features[i].properties.issue_date_months+'/'+siteListArray.features[i].properties.issue_date_days,
+               siteListArray.features[i].properties.validity_date_years+'/'+siteListArray.features[i].properties.validity_date_months+'/'+siteListArray.features[i].properties.validity_date_days,
+               siteListArray.features[i].properties.promoter ,
+               siteListArray.features[i].geometry.coordinates[0],
+               siteListArray.features[i].geometry.coordinates[1],
+               siteListArray.features[i].properties.license_type,
+               '<a href="http://hydro.naxa.com.np/core/hydropower-profile/'+siteListArray.features[i].properties.pk+'" title="" class="btn btn-outline-primary btn-sm">Detail <i class="la la-caret-right"></i></a>'
+        ]).draw( true );
+    }
+
+}
+ //DATATABLE BY FILTER END// 
+function ChartData(geojson){
+    $("#ChartContainer").html("");
+               $("#ChartContainer").html('<canvas id="hydropowerChart"></canvas>');
+    console.log("DAta CHart ");
+
+var lessthan20=0;
+    var between20to100=0;
+    var greaterthan100=0;
+
+     for(var i=0; i<geojson.features.length; i++){
+         if(geojson.features[i].properties.capacity<=20){
+            // console.log("less than");
+            lessthan20++;
+          }
+          else if(geojson.features[i].properties.capacity<=100 && geojson.features[i].properties.capacity>20 ){
+             // console.log("between");
+            // console.log(geojson.features[i].properties.capacity);
+            between20to100++;
+          }
+          else if(geojson.features[i].properties.capacity>100){
+             // console.log("Greater THan");
+            // console.log(geojson.features[i].properties.capacity);
+            greaterthan100++;
+          }
+
+        }
+
+ capacity_data=[
+        lessthan20,between20to100,greaterthan100
+      ];
+      CreateChart(capacity_data);
+
+}
+
+
+console.log(capacity_data);
+
+              
+// ChartData(siteListArray);
+    //end function 
+                //
+                //$('.select2').select2();
+
+                
+
+                $('.filters-wrap .dropdown-menu').on('click', function(event){
+                    event.stopPropagation();
+                });
+                
+                
+
+                 var chngclassname1= document.getElementsByClassName("multiselect dropdown-toggle btn btn-default");
+
+                        // console.log(chngclassname.length);
+                        for(t=0; t<chngclassname1.length; t++){
+                    chngclassname1[t].classList.add('custom-select');
+                    // console.log(chngclassname);
+                        }
+                
+                 // var phHeight = $(".page-header").height();
+                 // $(".header-bg").height(phHeight);
+//BAR GRAPH DATA START
+
+
+
+
+
+
+
+
+//BAR GRAPH DATA END
+
+
+console.log(capacity_data[0]);
+//BAR GRAPH DATASET START
+function CreateChart(capacity_data){
+
+                var ctx = document.getElementById("hydropowerChart");
+                Chart.defaults.global.defaultFontColor = 'white';
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ["Less than 20mw("+ capacity_data[0] +")", "Between 20-100mw("+ capacity_data[1] +")", "Greater than 100mw("+ capacity_data[2] +")"],
+
+                        datasets: [{
+
+                            data: capacity_data,
+                            backgroundColor: [
+                                '#FFFFFF',
+                                '#FFFFFF',
+                                '#FFFFFF'
+                            ],
+                            borderColor: [
+                                '#FFFFFF',
+                                '#FFFFFF',
+                                '#FFFFFF'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: false,
+                            position: 'top',
+                            labels:{
+                                fontSize: 16,
+                                fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'",
+                                padding: 20,
+                            } 
+                        },
+                        scales: {
+                            // xAxes: [{
+                            //     display: false
+                            // }],
+                            yAxes: [{
+                                display: false
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 0,
+                                bottom: 30
+                            }
+                        }
+                    }
+                });
+}
+$("#loader").css("display","none");
+
+            });
+        </script>
+	</body>
+</html>
+{% endblock content %}

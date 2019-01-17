@@ -186,3 +186,4 @@ virtualenvs/
 media/
 
 hydro/local_settings.py
+staticfiles

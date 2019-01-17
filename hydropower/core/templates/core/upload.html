@@ -1,0 +1,44 @@
+{% extends '_base.html' %}
+
+{% block content %}
+	    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading clearfix">
+                        <h4 class="pull-left"><b>UPLOAD GEOJSON</b></h4>
+
+                         <div class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-cog"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                        </div>
+
+                    </header>
+                    <div class="panel-body">
+                        {% if geojsons %}
+                            <ul>
+                            {% for geojson in geojsons %}
+                                <li><a href="{{ geojson.file.url }}">{{geojson.file.name }}</a></li>
+                            {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No file.</p>
+                        {% endif %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" value="Upload"></button>
+                        <p><a class="btn btn-xs btn-primary" href="{% url 'core:gislayer' %}">GIS Layers</a></p>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    	</section>
+    </section>
+{% endblock %}

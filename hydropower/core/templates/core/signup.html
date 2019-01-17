@@ -1,0 +1,54 @@
+{% extends 'hydro/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="ThemeBucket">
+        <link rel="shortcut icon" href="images/favicon.png">
+
+        <title>Login</title>
+
+        <!--Core CSS -->
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/bootstrap-reset.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/font-awesome.css' %}" rel="stylesheet" />
+
+        <!-- Custom styles for this template -->
+        <link href="{% static 'assets/css/style1.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/style-responsive.css' %}" rel="stylesheet" />
+    </head>
+    <body class="login-body">
+        <div class="container">
+            <form class="form-signin" action="" method="POST">
+                {% csrf_token %}
+                <h2 class="form-signin-heading">Sign Up</h2>
+                <div class="login-wrap">
+                    {% for field in form %}
+                    <div class="form-group">
+                        <label for="{{ field.label_id }}">{{field.label_tag }}</label>
+                        {{field}}
+                        {% if field.help_text %}
+                        <small style="display: none;">{{ field.help_text}}</small>
+                        {% endif %}
+                        {% for error in field.errors %}
+                        <p style="color: red">{{error}}</p>
+                        {%endfor%}
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="btn btn-lg btn-login btn-block" type="submit">Sign up</button>
+            </form>
+        </div>
+    <script src="{% static 'assets/js/jquery.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min1.js' %}"></script>
+    </body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,287 @@
+{% load static %}
+{# This is _base.html #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+
+    <meta http-equiv=”X-UA-Compatible” content=”IE=EmulateIE9”>
+    <meta http-equiv=”X-UA-Compatible” content=”IE=9”>
+
+    <link rel="shortcut icon" href="images/favicon.png">
+    <title>Admin</title>
+    <!--Core CSS -->
+    <link href="{% static 'assets/core/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/core/css/bootstrap-reset.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/core/css/font-awesome.css' %}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'assets/core/css/DT_bootstrap.css' %}" />
+
+      <!-- //step forms css -->
+      <link rel="stylesheet" href="{% static 'assets/core/css/jquery.steps.css' %}">
+
+      <!-- fileupload drop box css -->
+        <!-- <link rel="stylesheet" href="assets/admin/css/dropzone.css"> -->
+<!-- data css -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+
+<!-- end -->
+      <!-- fileuplaod css -->
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/core/css/bootstrap-fileupload.css' %}" />
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'assets/core/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/core/css/style-responsive.css' %}" rel="stylesheet" />
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]>
+    <script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    section#wizard-p-0 {
+        overflow-y: scroll;
+    }
+    .panel-body {
+
+    overflow: auto;
+}
+
+.form-control {
+
+    color: #110000;
+}
+    </style>
+</head>
+<body>
+<section id="container">
+<!--header start-->
+<header class="header fixed-top clearfix">
+<!--logo start-->
+<div class="brand">
+
+    <a href="index.html" class="logo">
+        <img src="{% static 'admin/images/hydroicon.png' %}" height="40" alt="">
+    </a>
+    <div class="sidebar-toggle-box">
+        <div class="fa fa-bars"></div>
+    </div>
+</div>
+<!--logo end-->
+
+
+    <!--  notification start -->
+
+    <!--  notification end -->
+
+<div class="top-nav clearfix">
+    <!--search & user info start-->
+    <ul class="nav pull-right top-menu">
+        <li>
+            <input type="text" class="form-control search" placeholder=" Search">
+        </li>
+        <!-- user login dropdown start-->
+        <li class="dropdown">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <img alt="" src="{% static 'admin/images/user.png' %}">
+                <span class="username" >Admin</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu extended logout">
+                <li><a href="{% url 'core:user_profile' request.user.username %}"><i class=" fa fa-suitcase"></i>Profile</a></li>
+                <li><a href="{% url 'password_change' %}"><i class="fa fa-cog"></i> Settings</a></li>
+                <li><a href="{% url 'logout' %}"><i class="fa fa-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- user login dropdown end -->
+        <!-- <li>
+            <div class="toggle-right-box">
+                <div class="fa fa-bars"></div>
+            </div>
+        </li> -->
+    </ul>
+    <!--search & user info end-->
+</div>
+</header>
+<!--header end-->
+<!--sidebar start-->
+<aside>
+    <div id="sidebar" class="nav-collapse">
+        <!-- sidebar menu start-->
+        <div class="leftside-navigation">
+            <ul class="sidebar-menu" id="nav-accordion">
+                <li>
+                    <a class="active" href="{% url 'core:cores_dashboard' %}">
+                        <i class="fa fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'home' %}">
+                        <i class="fa fa-home"></i>
+                        <span>Home Page</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'core:datasets' %}">
+                        <i class="fa fa-laptop"></i>
+                        <span>Datasets</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'core:gislayer' %}">
+                        <i class=" fa fa-laptop"></i>
+                        <span>GIS Layers</span>
+                    </a>
+<!--                     <ul class="sub">
+                        <li><a href="google_map.html">Google Map</a></li>
+                        <li><a href="vector_map.html">Vector Map</a></li>
+                    </ul> -->
+                </li>
+                <li class="sub-menu">
+                    <a href="{% url 'core:document' %}">
+                        <i class="fa fa-file" aria-hidden="true"></i>
+                        <span>Hydropower Documents</span>
+                    </a>
+                </li>
+                {% if request.user.is_superuser %}
+                <li class="sub-menu">
+                    <a href="{% url 'userrole:manage_users' %}">
+                        <i class="fa fa-laptop" aria-hidden="true"></i>
+                        <span>Manage Users</span>
+                    </a>
+                </li>
+                {% endif %}
+
+
+            </ul>
+          </div>
+        <!-- sidebar menu end-->
+    </div>
+</aside>
+
+{% block content %}
+{% endblock %}
+
+</section>
+<!-- Placed js at the end of the document so the pages load faster -->
+<!--Core js-->
+<script src="{% static 'assets/core/js/jquery-1.10.2.min.js' %}"></script>
+<script src="{% static 'assets/core/js/jquery-migrate.js' %}"></script>
+<!-- <script src="<?php echo base_url();?>assets/admin/js/jquery.js"></script> -->
+<script src="{% static 'assets/core/js/bootstrap.min.js' %}"></script>
+<script class="include" type="text/javascript" src="{% static 'assets/core/js/jquery.dcjqaccordion.2.7.js' %}"></script>
+<script src="{% static 'assets/core/js/jquery.scrollTo.min.js' %}"></script>
+<script src="{% static 'assets/core/js/jquery.slimscroll.js' %}"></script>
+<script src="{% static 'assets/core/js/jquery.nicescroll.js' %}"></script>
+
+<!-- scrip for steps forms -->
+<script src="{% static 'assets/core/js/jquery.steps.js' %}"></script>
+
+<!-- js fileupload drop box -->
+<!-- <script src="assets/admin/js/dropzone.js"></script> -->
+
+<!-- js fileuplaod -->
+<script type="text/javascript" src="{% static 'assets/core/js/bootstrap-fileupload.js' %}"></script>
+
+<!--script for datatables-->
+<script type="text/javascript" src="{% static 'assets/core/js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript" src="{% static 'assets/core/js/DT_bootstrap.js' %}"></script>
+
+<!-- datatables -->
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+
+<!-- end -->
+
+<!--common script init for all pages-->
+<script src="{% static 'assets/core/js/scripts.js' %}"></script>
+
+<script src="{% static 'assets/core/js/table-editable.js' %}"></script>
+
+<script>
+    $(document).ready(function() {
+        EditableTable.init();
+
+    $('#btnadd').on('click',function(){
+
+    console.log('sdasdas');
+
+     $("#columnid").append(' <br><br><label for="pwd">column name:</label>'+
+         '<input type="text" class="form-control" id="pwd" placeholder="Enter Column Name" name="c_name[]" required>'+
+       '</div>'+
+       '<div class="form-group">'+
+         '<label for="pwd">column length:</label>'+
+         '<input type="text" class="form-control" id="pwd" placeholder="Provide Length" name="c_length[]" >'+
+       '</div>'+
+
+        '<div class="form-group">'+
+            '<label for="pwd">column Type:</label>'+
+         '<select class="form-control" name="c_type[]">'+
+           '<option value="varchar">varchar</option>'+
+           '<option value="int">int</option>'+
+       '</select>');
+
+    });
+
+
+    $('#tb1').DataTable({
+       dom: 'Bfrtip',
+
+       buttons: [
+           'copy','csv', 'excel', 'pdf', 'print'
+       ]
+   });
+
+   $('#tb2').DataTable({
+      dom: 'Bfrtip',
+       "paging": true,
+       "searching": true,
+       "info": true,
+       "ordering": true,
+
+      buttons: [
+          'csv'
+      ]
+  });
+
+});//documnt
+
+// steps forms
+
+    $(function ()
+    {
+        $("#wizard").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft"
+        });
+
+
+        $("#wizard-vertical").steps({
+            headerTag: "h2",
+            bodyTag: "section",
+            transitionEffect: "slideLeft",
+            stepsOrientation: "vertical"
+        });
+    });
+</script>
+
+
+</body>
+</html>
+

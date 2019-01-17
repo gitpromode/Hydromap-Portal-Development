@@ -1,11 +1,107 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>DASHBOARDS</title>
-</head>
-<body>
-    <div>
-        <a href="{% url 'core:province_list' %}">Province</a>
-    </div>
-</body>
-</html>
+{% extends '_base.html' %}
+
+{% block content %}
+<!--     <div class="row no-gutters">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">{% if not request.user.is_superuser %}
+                    <li class="breadcrumb-item"><a href="{% url 'core:cores_dashboard' %}">Dashboard</a></li>
+                    {% endif %}
+                </ol>
+            </nav>
+        </div>
+    </div> -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading clearfix">
+                        <h4 class="pull-left"><b>Hydropower Table</b></h4>
+
+                         <div class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-cog"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                        </div>
+                      
+                    </header>
+                    <div class="panel-body">
+                        <div class="tools pull-right" style="margin-bottom: 20px;">
+                            <form class="form-inline" style="display:inline-block" action={% url 'core:file_upload' %} method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="file" name="file">
+                            </div>
+                                <button type="submit" class="btn btn-xs btn-primary">Hydropower File Upload</button>
+                            </form>
+                            <a href="{% url 'core:hydropower_add' %}" class="btn btn-xs btn-primary"> Add New Hydropower</a>
+
+                        </div>
+                    <div class="adv-table">
+                    <table  class="display table table-bordered table-striped" id="tb2">
+                    <thead>
+                    <tr>
+                        <th>Project</th>
+                        <th>Province</th>
+                        <th>District</th>
+                        <th>Municipality</th>
+                        <th>Capacity (MW)</th>
+                        <th>River</th>
+                        <th>Lic No</th>
+                        <th>Isuue Date</th>
+                        <th>Validity</th>
+                        <th>Promoter</th>
+                        <th>Address</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
+                        <th>License Type</th>
+                        <th>Date of Operation</th>
+                        {% if userrole.can_edit %}
+                        <th>Edit</th>
+                        {% endif %}
+                        {% if userrole.can_delete %}
+                        <th>Delete</th>
+                        {% endif %}
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {%for hydro in hydropower%}
+                    <tr class="gradeX">
+                        <td><a href="{% url 'core:hydropower_detail' hydro.id %}">{{hydro.project}}</a></td>                     
+                        <td>{{hydro.province}}</td>
+                        <td>{{hydro.district}}</td>
+                        <td>{{hydro.gapanapa}}</td>
+                        <td>{{hydro.capacity}}</td>
+                        <td>{{hydro.river}}</td>
+                        <td>{{hydro.lic_number}}</td>
+                        <td>{{hydro.issue_date}}</td>
+                        <td>{{hydro.validity_date}}</td>
+                        <td>{{hydro.promoter}}</td>
+                        <td>{{hydro.address}}</td>
+                        <td>{{hydro.longitude}}</td>
+                        <td>{{hydro.latitude}}</td>
+                        <td>{{hydro.license_type}}</td>
+                        <td>{{hydro.date_of_operation}}</td>
+                        {% if userrole.can_edit %}
+                        <td><a href="{% url 'core:hydropower_edit' hydro.id %}">Edit</a></td>
+                        {% endif %}
+                        {% if userrole.can_delete %}
+                        <td><a href="{% url 'core:hydropower_delete' hydro.id %}">Delete</a></td>
+                        {% endif %}
+                    </tr>
+                    {%endfor%}
+                    </table>
+                    </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+       
+        <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+{% endblock %}

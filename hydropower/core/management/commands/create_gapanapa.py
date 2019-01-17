@@ -2,7 +2,6 @@ import sys
 import argparse
 
 from django.core.management.base import BaseCommand
-from django.contrib.gis.geos import Point
 
 import pandas as pd
 
@@ -17,9 +16,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         df = pd.read_csv(sys.argv[3])
-        for row in range(0, len(df)):
+        for row in range(0, 573):
             gapanapa, created = GapaNapa.objects.get_or_create(
-                name=df['GAPA_NAPA'][row],
+                name=df['Municipality'][row],
                 district=District.objects.get(name=df['District'][row]),
                 )
             if created:

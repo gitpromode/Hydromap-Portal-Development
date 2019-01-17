@@ -1,0 +1,1696 @@
+            <!-- templates/home.html -->
+            {% extends 'hydro/base.html' %}
+            {% load static %}
+
+            {% block title %}Home{% endblock %}
+
+            {% block content %}
+
+            <!doctype html>
+            <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+            <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+            <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+            <!--[if gt IE 8]><!-->
+            <html class="no-js" lang="en"> <!--<![endif]-->
+            <head>
+                <meta charset="utf-8">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+                <title></title>
+                <meta name="description" content="">
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <link rel="apple-touch-icon" href="apple-touch-icon.png">
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/multiple-select.css' %}"> -->
+                <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.1.0/ol.css"> -->
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/ol5.css' %}"> -->
+                <link rel="stylesheet" href="{% static 'assets/css/ol.css' %}">
+                <!-- <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css"> -->
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}"> -->
+                <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+                <link rel="stylesheet" href="{% static 'assets/css/jquery.typeahead.css' %}">
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/mdb.css' %}"> -->
+
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap-multiselect.css' %}"> -->
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap-3.3.2.min.css' %}"> -->
+                <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" charset="utf-8"></script> -->
+                <link rel="stylesheet" href="{% static 'assets/css/nouislider.min.css' %}">
+                <!-- <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"> -->
+                <link rel="stylesheet" href="{% static 'assets/css/ol3-layerswitcher.css' %}">
+
+                <!-- <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' /> -->
+                <script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+                <link href="https://fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+                <style>
+                .sidebar.sm-sidebar.sb-top-right.scrolling-wrap.sh-600 {
+                    overflow: hidden;
+                    height: 93%;
+                }
+                    #compass{
+                        position: absolute;
+                        top: 47px;
+                        right: 10px;
+                    }
+                    .ol-scale-line {
+                      left: 50%;
+                      transform: translate(-50%, 0);
+                      -ms-transform: translate(-50%, 0)
+                  }
+                  .custom-popup-header {
+                    color: #3590f3;
+                    border-bottom: 1px solid #ccc;
+                }
+                #apply_button {
+                    padding: 6px 11px;
+                }
+                #clear1{
+                  padding: 6px 11px;  
+              }
+              .checkbox {
+                float: left;
+            }
+            .multiselect.dropdown-toggle.btn.btn-default {
+                font-size: 12px;
+                margin-left: -3px;
+            }
+            .multiselect.custom-select{
+                border:0 !important;
+            }
+            .districtSelect {
+                top: 104px !important; 
+                left: -25px !important;
+            }
+            #statusSelect{    
+                display: none;
+
+            }
+            #inputProvince{    
+                display: none;
+
+            }
+            #inputDistrict{    
+                display: none;
+            }
+            #inputLocalGovernment{    
+                display: none;
+
+            }
+            #capacitySelect{
+                display: none;
+            }
+            .multiselect-container>li>a>label {
+             padding: 4px 45px 3px 17px; /*padding: 4px 50px 3px 20px;*/
+             color:black;
+         }       
+         .modal-backdrop {
+            z-index: 3;
+        }
+        .form-control{
+            border: 0;
+            border-bottom: 2px solid rgba(0,0,0,.1);
+        }
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 3; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Add Zoom Animation */
+        .animate {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {-webkit-transform: scale(0)} 
+            to {-webkit-transform: scale(1)}
+        }
+
+        @keyframes animatezoom {
+            from {transform: scale(0)} 
+            to {transform: scale(1)}
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+               display: block;
+               float: none;
+           }
+           .cancelbtn {
+               width: 100%;
+           }
+       }
+       .js-typeahead-car_v1.typeahead.tt-input {
+
+        padding-right: 0px;
+        border-color: #a89138;
+
+    }
+
+    .tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
+    .tt-hint, .tt-input {
+        width: 396px;
+        height: 30px;
+        padding: 8px 12px;
+        font-size: 24px;
+        line-height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        outline: none;
+    }
+
+
+    .tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-menu {
+
+        width: 275px;
+        margin-top: -1px;
+        padding: 3px 0;
+        */ border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: -3px solid rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 10px rgba(0,0,0,.2);
+        background-color: white;
+    }
+    .tt-suggestion {
+
+        padding: 15px 6px;
+        font-size: 12px;
+        line-height: 0px;
+        cursor: pointer;
+        display: block;
+        text-align: left;
+        border-bottom: 1px solid #ece6e6;
+    }
+    .tt-suggestion:hover {
+        color: #f0f0f0;
+        background-color: #0097cf;
+    }
+    .tt-cursor{
+        background-color: #0097cf;
+    }
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+    #overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 2;
+        cursor: pointer;
+    }
+
+    #text{
+        position: absolute;
+        width: 100%;
+        height: 100%
+        top: 50%;
+        left: 50%;
+        font-size: 100px;
+        color: white;
+        transform: translate(-50%,155%);
+        -ms-transform: translate(-50%,50%);
+    }
+    #about_btn {
+        background-color: #17a2b8;
+    }
+    .js-typeahead.form-control {
+
+        border-style: solid;
+        border-color: #92a8d1;
+
+    }
+    .ol-zoom {
+        display: none;
+    }
+
+    .sidebar.full-sidebar .sidebar-toggle {
+
+        background-color: #E6C200;
+        color: black;
+
+    }
+    .sidebar.full-sidebar {
+
+
+        width: 56.1%;
+        left: 10.8rem;
+        right: .8rem;
+        bottom: -76px;
+        border-radius: 2px;
+        height: auto;
+
+    }
+
+    .nav-tabs {
+     cursor: pointer;
+
+    }   
+
+    .sidebar.sm-sidebar{
+        max-width: 300px;
+        width:100%;
+
+    }
+    .sidebar.sm-sidebar.sb-top-left {
+        max-width: 80px;
+        width: 100%;
+        top: 100px;
+    }
+    @media screen and (max-width:768px){
+        .sidebar.sm-sidebar.sb-top-left{
+        top:50px;
+    }
+    }
+    @media screen and (max-width:480px){
+        .sidebar.sm-sidebar.sb-top-left{
+        top:35px;
+    }
+    #form-car_v1{
+        top:5px;
+    }
+    .nav-tabs{
+        width:36px !important;
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item a.nav-link {
+        padding: 5px 5px !important;
+    }
+    }
+    .sidebar.sm-sidebar.sb-top-right{
+        max-width: 100%;
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item{
+        background-color:#16a696;
+
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item a.nav-link{
+        border-bottom:1px solid #ccc;
+        color:#fff;
+        -webkit-transition:all 0.5s ease-in-out;
+        -ms-transition:all 0.5s ease-in-out;
+        -moz-transition:all 0.5s ease-in-out;
+        transition:all 0.5s ease-in-out;
+        padding:5px 10px;
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item:last-child a.nav-link{
+        
+        border-bottom:none;
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item:hover{
+        background-color:#ffffff;
+
+    }
+    .sidebar.sm-sidebar.sb-top-left .nav-item:hover a.nav-link, .sidebar.sm-sidebar.sb-top-left .nav-item a.nav-link:focus, .sidebar.sm-sidebar.sb-top-left .nav-item a.nav-link:focus{
+        color:#a89138;
+
+    }
+
+    .sidebar.sm-sidebar.sb-top-right{
+        position: inherit;
+        top:inherit;
+    }
+    .autowidth{
+        max-width: 300px !important;
+        width:100% !important;
+    }
+    #main-container #form-car_v1{
+        position: absolute;
+        top:15px;
+        left:15px;
+        max-width: 230px;
+        width:100%;
+        z-index: 99;
+    }
+    #the-basics span.twitter-typeahead{
+        width:100%;
+    }
+    .js-typeahead-car_v1.typeahead.tt-input {
+        padding-right: 0px;
+        border-color: #a89138;
+        border-radius: 5px;
+        -webkit-border-radius:5px;
+        -ms-border-radius:5px;
+    }
+
+
+    .navbar{background: #ededed;border-bottom: 1px solid #ccc;}
+    .navbar ul li a{
+        text-transform: uppercase;
+    }
+    .custom-select{
+        border:0;
+        border-bottom: 2px solid rgba(0,0,0,.1);
+    }
+    /*.custom-select{border-radius: 30px;padding: 0 10px;background: none;text-align: center; margin: 0 5px; cursor: pointer;}*/
+    .filter{padding: 10px 10px; text-align: center; background: #fff; position: relative;z-index: 1011; box-shadow: 0 5px 5px rgba(0,0,0,0.2); -webkit-box-shadow: 0 5px 5px rgba(0,0,0,0.2);}
+    .form-inline{display: inherit;}
+    .btn-group button {
+                                /*background-color: #4CAF50; 
+                                color: white; /* White text */
+                                padding: 7px 24px; /* Some padding */
+                                /*border:none;*/
+                                /*width: 50%;*/ /* Set a width if needed */
+                                display: block; /* Make the buttons appear below each other */
+                            }
+
+                        }
+                        /*.select2-container{width: auto!important;}*/
+                        .btn {
+                            padding: 7px 24px;
+                            cursor: pointer;
+                            border-radius: 5px;
+                            margin-left: 10px;
+                        }
+                        .btn-group button:first-child{
+                            border-top-left-radius: 5px;
+                            border-bottom-left-radius: 5px;
+                            margin-left: 5px;
+                            padding-right: 15px;
+                        }
+
+                        .btn-group button:last-child {
+                            border-top-right-radius: 5px;
+                            border-bottom-right-radius: 5px;
+                            /*background: #c62127;*/
+                            padding-left: 15px;
+                        }
+                        .input-group-prepend .btn, .input-group-append .btn{border-radius: 3px;margin:0;padding: 0px 13px;background: #fff; color: #333;} 
+
+                        /* Add a background color on hover */
+                        .btn-group button:hover {
+                            opacity: 0.9;
+                        }
+                        .center_align {
+                          text-align:center;
+                          width: 100%;
+                          text-align-last:center;
+                      }
+                      select:-moz-focusring {
+                          color: transparent;
+                          text-shadow: 0 0 0 #000;
+                      }
+
+
+                      .tabbing{margin-left: 54px;margin-top: -80px;}
+                      .nav-tabs{width:40px;border-radius: 4px;overflow: hidden; border: 1px solid #16a696;
+                        -webkit-background-clip: padding-box; /* for Safari */
+                        background-clip: padding-box;}
+                        .sb-top-right{background: #ededed;}
+                        .bar {
+                            fill: #16a696;
+                        }
+                        
+                        .axis {
+                            font-size: 10px;
+                            text-transform: uppercase;
+                            font-weight: 600;
+                            
+                        }
+                        g.y.axis{
+                            padding-right:10px;
+                            padding-bottom:5px;
+                            margin-bottom:5px;
+                            border-bottom:1px solid #efefef;
+                        }
+                        
+                        .axis path,
+                        .axis line {
+                            fill: none;
+                            display: none;
+                        }
+                        
+                        .label {
+                            font-size: 13px;
+                        }
+                        h6{
+                            padding-bottom:10px;
+                            border-bottom:1px solid #efefef;
+                        }
+                        .holders{
+                            padding: 0.4rem;
+                        /*box-shadow: 0 3px 3px rgba(0,0,0,0.2);
+                        -webkit-box-shadow: 0 3px 3px rgba(0,0,0,0.2);*/
+                        background: #FFF;
+                        margin-top:.8rem;
+                    }
+                    .holders:last-child{box-shadow: none;}
+                    .handal{position: absolute; top: 100px; left: 13px;}
+                    .handal.nav-tabs{background: #fff;}
+                    .nav-link {
+                        padding: .6rem .8rem;
+                        cursor: pointer;
+                    }
+                    .nav-fill .nav-item{border-bottom: 1px solid rgb(168, 145, 56);
+                    }
+                    .nav-tabs .nav-link {
+                        color: #181711;
+                    }
+                    .sidebar.full-sidebar .sidebar-toggle span {
+
+                        font-size: 15px;
+                        font-weight: bold;
+
+                    }
+
+                    #loader {
+                      position: absolute;
+                      left: 50%;
+                      top: 59%;
+                      z-index: 1;
+                     /* width: 150px;
+                      height: 150px;*/
+                      margin: -75px 0 0 -75px;
+                      border: 7px solid #f3f3f3;
+                      border-radius: 50%;
+
+                      border-top: 7px solid #8e8133;
+                      width: 38px;
+                      height: 38px;
+                      -webkit-animation: spin 2s linear infinite;
+                      animation: spin 2s linear infinite;
+                  }
+
+                  @-webkit-keyframes spin {
+                      0% { -webkit-transform: rotate(0deg); }
+                      100% { -webkit-transform: rotate(360deg); }
+                  }
+
+                  @keyframes spin {
+                      0% { transform: rotate(0deg); }
+                      100% { transform: rotate(360deg); }
+                  }
+
+                  /* Add animation to "page content" */
+                  .animate-bottom {
+                      position: relative;
+                      -webkit-animation-name: animatebottom;
+                      -webkit-animation-duration: 1s;
+                      animation-name: animatebottom;
+                      animation-duration: 1s
+                  }
+
+                  @-webkit-keyframes animatebottom {
+                      from { bottom:-100px; opacity:0 } 
+                      to { bottom:0px; opacity:1 }
+                  }
+
+                  @keyframes animatebottom { 
+                      from{ bottom:-100px; opacity:0 } 
+                      to{ bottom:0; opacity:1 }
+                  }
+
+                  #myDiv {
+                      /*display: none;*/
+                      text-align: center;
+                  }   
+
+                  .layer-switcher{
+
+                    right:200px;
+                }  
+
+                .noUi-handle-upper{
+                    display:none;
+                }
+                .sidebar.full-sidebar .sidebar-toggle {
+
+                    width: auto;
+                    height: 40px;
+                    padding: .2rem 1rem;
+                    display: table;
+                    line-height: 0px;
+                }
+                    ./*sidebar.full-sidebar.active {
+
+                    bottom: 0;
+
+                }*/
+                #map-canvas {
+                    margin: 0;
+                    padding: 0;
+                    height: 400px;
+                    max-width: none;
+                }
+                #map-canvas img {
+                    max-width: none !important;
+                }
+                .gm-style-iw {
+                    width: 350px !important;
+                    top: 15px !important;
+                    left: 0px !important;
+                    background-color: #fff;
+                    box-shadow: 0 1px 6px rgba(178, 178, 178, 0.6);
+                    border: 1px solid rgba(72, 181, 233, 0.6);
+                    border-radius: 2px 2px 10px 10px;
+                }
+                #iw-container {
+                    /*background-color: #a89138;*/
+                    /*background: white;*/
+                    margin: 10px;                
+
+                }
+                .iw-source {
+
+                    color: black;
+                    text-align: left;
+                    margin-right: 9px;
+                    font-family: 'Open Sans Condensed', sans-serif;
+                    font-size: 11px;
+                    padding-left: 1em;
+                    line-height: 29px;
+
+                }
+                #iw-container .iw-title {
+                    font-family: 'Open Sans Condensed', sans-serif;
+
+                    font-size: 14px;
+
+                    font-weight: 400;
+
+                    padding: 10px;
+
+                    margin: 0;
+
+                    border-radius: 2px 2px 0 0;
+
+                    color: black;
+                    text-transform: uppercase;
+                }
+                #iw-container .iw-source strong{
+                    text-transform: uppercase;
+                    padding-right:7px;
+                    font-size:9px;
+                }
+                #iw-container .iw-content {
+                    font-size: 13px;
+                    line-height: 18px;
+                    font-weight: 400;
+                    margin-right: 1px;
+                    padding: 15px 5px 20px 15px;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+
+                }
+                .iw-content img {
+                    float: right;
+                    margin: 0 5px 5px 10px; 
+                }
+                .iw-subTitle {
+                    font-size: 16px;
+                    font-weight: 700;
+                    padding: 5px 0;
+                }
+                .iw-bottom-gradient {
+                    position: absolute;
+                    width: 326px;
+                    height: 25px;
+                    bottom: 10px;
+                    right: 18px;
+                    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                    background: -ms-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+                }
+                .filter {
+                    -webkit-box-shadow: 0 2px 5px rgb(142, 129, 51)
+                }
+
+                .noUi-horizontal .noUi-handle {
+
+                    right: -9px !important;
+                    width: 20px;
+
+                    height: 22px;
+                }
+                .noUi-horizontal {
+
+                    height: 10px;
+
+                }
+
+                .noUi-handle::after, .noUi-handle::before {
+
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height: 10px;
+                    width: 1px;
+                    background: #16a696;
+                    left: 7px;
+                    top: 4px;
+
+                }
+                .noUi-handle::after {
+
+                    left: 10px;
+
+                }
+                .noUi-connect{
+                    background: #16a696;
+                }
+                .noUi-tooltip {
+                    padding:4px;
+                    font-size:12px;
+                }
+                .dropdown-menu.show {
+
+                    display: block;
+                    max-height: 400px;
+                    min-height: 100px;
+                    overflow-y: scroll;
+
+                }
+
+                .ol-popup {
+                    position: absolute;
+                    background-color: white;
+                    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+                    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+                    padding: 15px;
+                    border-radius: 10px;
+                    border: 1px solid #cccccc;
+                    bottom: 12px;
+                    left: -85px;
+                    min-width: 197px;
+                }
+                .ol-popup:after, .ol-popup:before {
+                    top: 100%;
+                    border: solid transparent;
+                    content: " ";
+                    height: 0;
+                    width: 0;
+                    position: absolute;
+                    pointer-events: none;
+                }
+                .ol-popup:after {
+                    border-top-color: white;
+                    border-width: 10px;
+                    left: 87px;
+                    margin-left: -10px;
+                }
+                .ol-popup:before {
+                    border-top-color: #cccccc;
+                    border-width: 11px;
+                    left: 87px;
+                    margin-left: -11px;
+                }
+                .ol-popup-closer {
+                    text-decoration: none;
+                    position: absolute;
+                    top: 2px;
+                    right: 8px;
+                }
+                .ol-popup-closer:after {
+                    content: "✖";
+                }
+
+                .bg-gb{
+                    background-color: #16a696 !important;
+                }
+
+                .bg-completed{
+                     background-color: #4564cc !important;
+                }
+                .bg-ongoing{
+                     background-color: #007f00 !important;            }
+
+                .legend-holder{
+                    position: absolute;
+                    bottom: 41px;
+                    background: #FFF;
+                    padding: 12px;
+                    box-shadow: 0 0 10px rgba(0,0,0,.3);
+                    text-align: left;
+                    border-radius: 3px;
+                    right: auto;
+                }
+                .legend-list{
+        
+                }
+
+                .legend-list li{
+                    font-size: 13px;
+                }
+
+                .legend-list li span{
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 1px;
+                    margin-right: 4px;
+                    border-radius: 50%;
+                }
+                .table th, .table td{
+                    padding: .5rem;
+                }
+                .noUi-handle {
+
+                    cursor: pointer;
+
+                }
+                .timeline-wrap {
+
+                    padding: 30px;
+                    -webkit-box-shadow: 0 0 15px rgba(0,0,0,0.2);
+                }
+                .noUi-value-horizontal {
+
+                -webkit-transform: translate(-50%,50%);
+                transform: translate(-50%,50%);
+                color: black;
+                }
+                .noUi-pips-horizontal {
+                padding: 1px 0;
+                }
+                .multiselect-item.multiselect-all label.checkbox input{
+                    margin-right: 5px;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+
+                #form-car_v1 .js-typeahead-car_v1.typeahead.tt-input {
+                    padding-right: 0px;
+                    border-color: #a89138;
+                    border-radius: 5px;
+                    -webkit-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    border: none;
+                    border-bottom: 1px solid #a89138;
+                    border-radius: 0;
+                    font-size: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                }
+                #form-car_v1 input.js-typeahead-car_v1.typeahead.tt-input:focus {
+                    border-color: #16a696;
+                }
+                .map-holder{
+                    min-height: 250px;
+                }
+
+                .page-header{
+                    background: url(../static/assets/img/img-bg.jpg);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    min-height: 450px;
+                }
+                @media screen and (max-width:576px){
+                #main-container #form-car_v1 {
+                    top: 5px;
+                }
+                }
+                @media(min-width: 768px){
+                    body{
+                        overflow-y: hidden;
+                    }
+                } 
+                @media(min-width: 768px){
+                    body{
+                        overflow-y: hidden;
+                    }
+                }
+               @media screen and (max-width:768px){
+                    .legend-holder{
+                    
+                    bottom: 41px;
+                    left: 58px;
+                    right:auto;
+                    }
+                }@media screen and (max-width:768px){
+                    .sidebar.full-sidebar .sidebar-toggle {
+                    left:0;
+                    }
+                }
+                @media screen and (max-width:768px){
+                   .ol-scale-line {
+                    left: 23%;
+                    }
+                }
+                        
+                .ol-scale-line {
+                    left: 22%;
+                    background: #676fc9;
+                }
+            </style>
+        </head>
+
+        <body class="">
+
+                    <!--[if lt IE 8]>
+                        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                        <![endif]-->
+                        <div id="loader"></div>
+
+
+
+                        <div id="myDiv" class="animate-bottom">
+                            <header id="app-header">
+                                <nav class="navbar navbar-expand-lg navbar-light">
+                                <a>Nepal</a>
+                                    <a class="navbar-brand text-left" href="{% url 'home' %}">
+                                        <!-- <img src="{% static 'assets/img/hydroicon.png' %}" alt="" height="35"> -->
+                                        <span><strong>Hydropower</strong><br/>Portal</span>
+                                    </a>
+                                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span class="navbar-toggler-icon"></span>
+                                    </button>
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                        <ul class="navbar-nav ml-auto">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="http://staging.nitifoundation.org/">Home</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a  class="nav-link" href="{% url 'home' %}">Map</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'core:datasets' %}">Datasets</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'core:about' %}">About</a>
+                                        </li>
+
+
+                          <!-- <li class="nav-item">
+                            <a class="nav-link" href="#">Infographics</a>
+                        </li> -->
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <!--  //end select -->
+        <div class="filter">
+            <form class="form-inline" id="example-reset-form">
+                <!-- <form id="example-reset-form" class="form-inline" role="form"> -->
+
+                <select id="inputProvince" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                  <option id="1">Province 1</option>
+                  <option id="Province2">Province 2</option>
+                  <option id="3">Province 3</option>
+                  <option id="4">Province 4</option>
+                  <option id="5">Province 5</option>
+                  <option id="6">Province 6</option>
+                  <option id="7">Province 7</option>
+              </select>
+
+
+              <select id="inputDistrict" class="multi-checkbox" multiple="multiple" autocomplete="off">                   
+                <!-- <option>ARGHAKHANCHI</option>
+
+                <option>BAGLUNG</option>
+
+                <option>BAITADI</option>
+
+                <option>BAJHANG</option>
+
+                <option>BAJURA</option>
+
+                <option>BHOJPUR</option>
+
+                <option>CHITAWAN</option>
+
+                <option>DAILEKH</option>
+
+                <option>DARCHULA</option>
+
+                <option>DHADING</option>
+
+                <option>DOLAKHA</option>
+
+                <option>DOLPA</option>
+
+                <option>DOTI</option>
+
+                <option>GORKHA</option>
+
+                <option>GULMI</option>
+
+                <option>HUMLA</option>
+
+                <option>ILAM</option>
+
+                <option>JAJARKOT</option>
+
+                <option>JUMLA</option>
+
+                <option>KABHREPALANCHOK</option>
+
+                <option>KAILALI</option>
+
+                <option>KALIKOT</option>
+
+                <option>KAPILBASTU</option>
+
+                <option>KASKI</option>
+
+                <option>KHOTANG</option>
+
+                <option>LALITPUR</option>
+
+                <option>LAMJUNG</option>
+
+                <option>MAKAWANPUR</option>
+
+                <option>MANANG</option>
+
+                <option>MORANG</option>
+
+                <option>MUGU</option>
+
+                <option>MUSTANG</option>
+
+                <option>MYAGDI</option>
+
+                <option>NAWALPARASI_E</option>
+
+                <option>NAWALPARASI_W</option>
+
+                <option>NUWAKOT</option>
+
+                <option>OKHALDHUNGA</option>
+
+                <option>PALPA</option>
+
+                <option>PANCHTHAR</option>
+
+                <option>PARBAT</option>
+
+                <option>PYUTHAN</option>
+
+                <option>RAMECHHAP</option>
+
+                <option>RASUWA</option>
+
+                <option>ROLPA</option>
+
+                <option>RUKUM_E</option>
+
+                <option>RUKUM_W</option>
+
+                <option>RUPANDEHI</option>
+
+                <option>SANKHUWASABHA</option>
+
+                <option>SINDHUPALCHOK</option>
+
+                <option>SOLUKHUMBU</option>
+
+                <option>SURKHET</option>
+
+                <option>SYANGJA</option>
+
+                <option>TANAHU</option>
+
+                <option>TAPLEJUNG</option>
+
+                <option>TERHATHUM</option> -->
+
+            </select>
+
+            <select id="inputLocalGovernment" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                
+
+            </select>
+                 <!--    <select id="statusSelect" name="cars" class="custom-select" autocomplete="off">
+                        <option selected>Status</option>
+                        <option class = "projectStatus" value = "Survey">Survey</option>
+                        <option class = "projectStatus" value = "Generation">Generation</option>
+                        <option class = "projectStatus" value = "Operation">Operation</option>
+                    </select> -->
+                    <select id="statusSelect" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                        <option class = "projectStatus" value = "Survey">Survey</option>
+                        <option class = "projectStatus" value = "Generation">Generation</option>
+                        <option class = "projectStatus" value = "Operation">Operation</option>
+
+                    </select>
+
+                    <!-- <select id="capacitySelect" name="cars" class="custom-select" autocomplete="off">
+                        <option selected>Capacity</option>
+                        <option class = "projectCapacity" value = "0_20">Less than 20mw</option>
+                        <option class = "projectCapacity" value = "20_100">Between 20-100mw</option>
+                        <option class = "projectCapacity" value = "100_20000">Greater than 100mw</option>
+                        </input>
+                    </select> -->
+
+                    <select id="capacitySelect" class="multi-checkbox" multiple="multiple" autocomplete="off">
+                        <div class="container">
+                          <div class="row">
+                           <option class = "projectCapacity" value = "0_20">Less than 20mw</option>
+                           <option class = "projectCapacity" value = "20_100">Between 20-100mw</option>
+                           <option class = "projectCapacity" value = "100_20000">Greater than 100mw</option>
+                       </div>
+                   </div>   
+               </select>
+               <!-- <input type="button" id="btnget" value="Get Selected Values" /> -->
+               <div class="btn-group">
+                <button id = "apply_button" type="button" class="btn btn-outline-primary"><i class="la la-check"></i> Apply</button>
+                <button id="clear1" type="reset" class="btn btn-outline-primary"><i class="la la-close"></i> Clear </button>
+
+            </div>
+            <a id="export-png" href="#" class="btn btn-light" download="map.png"><i class="la la-download"></i> Export Map</a>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Open Hydroportal-Niti Foundation</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p>Description.</p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+                         <!-- <div id="overlay" onclick="offbtn()">
+                             <div id="text">NITI FOUNDATION @NAXA </div>
+                         </div>              -->
+
+                     </form>
+                 </div>
+                 <div id="main-container">
+                   <div class="map-wrap">
+                   <div class="hydro-md-9">
+                    <div id="map" class="map-holder"></div>
+                    <div id="compass"><img src="{% static 'assets/img/compass.png' %}" style="width:60px;height:60px"></div>
+                    <div class="legend-holder">
+                        <ul class="legend-list">
+                            <li><span></span><b> Legend </b> </li>
+                            <li><span class="bg-gb"></span> No.of Hydropowers </li>
+                            <li><img src="{% static 'assets/img/marker/marker-red.png' %}" alt="" height="15"> Survey</li>
+                            <li><img src="{% static 'assets/img/marker/marker-blue.png' %}" alt="" height="15"> Generation</li>
+                            <li><img src="{% static 'assets/img/marker/marker-green.png' %}" alt="" height="15"> Operation</li>
+                            
+                        </ul>
+                    </div>
+                    </div>
+                    <div id="popup" class="ol-popup" style="display: none">
+                        <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+                        <div id="popup-content">
+                            
+                        </div>
+
+
+                    </div>
+                    
+                    <aside class="sidebar sm-sidebar sb-top-left">
+                        <div class="content-holder text-left">
+                            <form id="form-car_v1" class="mb-1" name="form-car_v1">
+                                <div class="typeahead__container">
+                                    <div class="typeahead__field">
+                                        <div id="the-basics" class="typeahead__query" style="display: none;">
+                                            <input class="js-typeahead-car_v1 typeahead" name="car_v1[query]" placeholder="Search" autocomplete="off" type="text">
+                                        </div>
+                                        <!-- <input type="submit" style="position: absolute; left: -9999px"> -->
+                                        <!-- <div class="typeahead__button" >
+                                            <button type="submit" disabled> 
+                                                <i class="typeahead__search-icon"></i>
+                                            </button>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </form>
+                            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                <a class="nav-link" id="tab001-tab" data-toggle="tab" href="#tab001" role="tab" aria-controls="tab001" aria-selected="true"><i class="la la-map"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab002-tab" data-toggle="tab" href="#tab002" role="tab" aria-controls="tab002" aria-selected="false"><i class="la la-line-chart"></i></a>
+                            </li>
+                        </ul>
+                        <div class="tabbing bs-2">
+                            <div class="tab-content bg-white" id="myTabContent">
+                                <div class="tab-pane fade" id="tab001" role="tabpanel" aria-labelledby="tab001-tab">
+                                    <ul class="toggle-list layerContainer">
+                                        <li>
+                                            <span><strong>Trans</strong></span>
+                                            <label class="switch switch-xxs">
+                                                <input class="CheckBox loadLayer" type="checkbox">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane fade" id="tab002" role="tabpanel" aria-labelledby="tab002-tab">
+                                    <div class="scrolling-wrap sh-200">
+                                        <ul class="maptype-list">
+                                           <!--  <li class="maptype active" value = "arcgis">
+                                                <span class="img-maptype "></span>
+                                                <h6>ArcGIS Tile</h6>
+                                            </li> -->
+                                            <li class="maptype" value = "osm">
+                                                <span class="img-maptype mt-satellite" ></span>
+                                                <h6>Openstreet Map</h6>
+                                            </li>
+                                            <li class="maptype" value = "osm_light">
+                                                <span class="img-maptype mt-terrain"></span>
+                                                <h6>Openstreet Map Light</h6>
+                                            </li>
+                                            <li class="maptype" value = "bing_aerial">
+                                                <span class="img-maptype mt-openstreet"></span>
+                                                <h6>Bing_Aerial</h6>
+                                            </li>
+                                            <li class="maptype" value = "bing_road">
+                                                <span class="img-maptype mt-positron"></span>
+                                                <h6>Bing_Road</h6>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="handal">
+                        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                        <li class="nav-item" id="zoomin">
+                            <a class="nav-link"><i  class="la la-search-plus"></i></a>
+                        </li>
+                          <li class="nav-item" id="zoomout">
+                            <a class="nav-link"><i class="la la-search-minus"></i></a>
+                        </li>
+                        <li id="refresh" class="nav-item">
+                            <a class="nav-link"><i class="la la-refresh"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+            <div class="hydro-md-3">
+
+            <aside class="sidebar sm-sidebar sb-top-right scrolling-wrap sh-600">
+                <div id="popup-sidebar" style="display:none;">
+                    <div class="holders">
+
+                    </div>
+                    <div id=view_details >'<a href="" title="" class="btn bg-gb text-white btn-block btn-sm mt-3">View Detail</a>'</div>
+                </div>
+                <div id="bar_graph" style="display:block;" >
+                    <div class="holders">
+                        <h6><strong>Hydropower Distributtion</strong></h6>
+                        <div id="graphic"></div>
+                    </div>
+                    <div class="holders">
+                        <h6><strong>Hydropower Status</strong></h6>
+                        <!-- <div id="graphic1"></div> -->
+                        <!-- <div id="piechart"></div> -->
+                        <div id="chart_pie"></div>
+                    </div>
+                    <div class="holders">
+                        <h6><strong>Hydropower Capacity</strong></h6>
+                        <div id="graphic2"></div>
+                    </div>
+                </div>
+            </aside>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    </script>
+    </script>
+
+    <aside id="timeline-sidebar" class="sidebar full-sidebar">
+        <div class="padding bg-white bs-2 mt-40px">
+            <div class="sidebar-toggle toggle-timeline bg-gb text-white">
+                <span>Timeline</span> <i class="la la-history"></i>
+            </div>
+            <div class="timeline-wrap">
+                <div class="action-btn">
+                    <i class="la la-play"></i>
+                    <i class="la la-pause" style = "display:none;"></i>
+                </div>
+                <div id="dateslider"></div>
+            </div>
+        </div>
+    </aside>
+    <script>
+        let static_url = "{% get_static_prefix %}";
+        let media_url = "{% get_media_prefix %}";
+
+    </script>
+
+
+
+    <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery-3.2.1.min.js' %}"><\/script>')</script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/js/bootstrap-multiselect.min.js" charset="utf-8"></script> -->
+    <!-- <script src="{% static 'assets/js/jquery-2.2.4.min.js' %}"></script> -->
+    <script src="{% static 'assets/js/bootstrap-multiselect.js' %}">
+    </script> 
+    <!-- <script src="{% static 'assets/js/multiple-select.js' %}"></script> -->
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.1.0/ol.js"></script> -->
+    <!-- <script src="{% static 'assets/js/ol5.js' %}"></script> -->
+    <script src="{% static 'assets/js/ol.js' %}"></script> 
+    <!-- <script src="{% static 'assets/js/mdb.js' %}"></script>  -->
+                    <!-- <script src="https://openlayers.org/en/v4.6.5/build/ol.js"></script> 
+                -->
+                <script src="{% static 'assets/js/ol3-layerswitcher.js' %}"></script>
+                <script src="{% static 'assets/js/FileSaver.min.js' %}"></script>
+                <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
+                <script src="{% static 'assets/js/vendor/jquery-ui.min.js' %}"></script>
+                <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+                <!-- <script src="{% static 'assets/js/bootstrap-3.3.2.min.js' %}"></script> -->
+                <script src="{% static 'assets/js/vendor/jquery.nicescroll.min.js' %}"></script>
+                <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script> -->
+                <script src="{% static 'assets/js/nouislider.min.js' %}"></script>
+
+                <!-- <script src="{% static 'assets/js/OpenLayers.js' %}" type="text/javascript"></script> -->
+                <script src="{% static 'assets/js/popup.js' %}" type="text/javascript"></script>
+                <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+
+                <!-- <script src="{% static 'assets/js/extent.js' %}" type="module"></script> -->
+                <script src="{% static 'assets/js/feature.js' %}" type="text/javascript"></script>
+                <!-- <script src="{% static 'assets/js/multi-check.js' %}" type="text/javascript"></script> -->
+                <!-- <script src="{% static 'assets/js/jquery.typeahead.js' %}" type="text/javascript"></script> -->
+                <script src="{% static 'assets/data/hydro.js' %}" type="text/javascript"></script>
+                <script src="{% static 'assets/js/d3.v3.min.js' %}" type="text/javascript"></script>
+                <script src="{% static 'assets/js/d3.donut.js' %}" type="text/javascript"></script>
+
+                 <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>  -->
+
+
+                <script src="{% static 'assets/js/typeahead.jquery.min.js' %}" type="text/javascript"></script>
+                <!--<script src="assets/js/loader.js?id=geopython" type="text/javascript"></script>-->
+                <!-- <script src="{% static 'assets/js/vendor/select2.min.js' %}"></script> -->
+                <script src="{% static 'assets/js/geopython.js' %}"></script>
+                
+
+
+                <!-- <script src="{% static 'assets/js/vendor/jQDateRangeSlider-min.js' %}"></script> -->
+
+                <script src="{% static 'assets/js/plugins.js' %}"></script>
+                <script>
+                    $(function() {
+                        $('#inputLocalGovernment').multiselect({
+
+                            includeSelectAllOption: true,
+                            nonSelectedText: 'Select Local Government',
+
+                        });
+                       
+
+                        $('#inputDistrict').multiselect({
+
+                            includeSelectAllOption: true,
+                            nonSelectedText: 'Select District',
+
+                        });
+                       
+                        // $('#inputProvince').multiselect({
+
+                        //     includeSelectAllOption: true,
+                        //     nonSelectedText: 'Select Province',
+
+                        // });
+
+                        $('#inputProvince').multiselect({
+                            includeSelectAllOption: true,
+                            nonSelectedText: 'Select Province'
+                        });
+
+                        $("#inputProvince").multiselect('selectAll', false);
+                        $("#inputProvince").multiselect('updateButtonText');
+
+                        $('#capacitySelect').multiselect({
+
+                            includeSelectAllOption: true,
+                            nonSelectedText: 'Select Capacity',
+
+                        });
+                        $("#capacitySelect").multiselect('selectAll', false);
+                        $("#capacitySelect").multiselect('updateButtonText');
+
+
+                        $('#statusSelect').multiselect({
+
+                            includeSelectAllOption: true,
+                            nonSelectedText: 'Select Status',
+
+                        });
+                        $("#statusSelect").multiselect('selectAll', false);
+                        $("#statusSelect").multiselect('updateButtonText');
+
+                        $('#btnget').click(function() {
+
+                            alert($('#chkveg').val());
+
+                        });
+
+                        // console.log('k');
+                        // $('#inputDistrict').siblings().children('ul').css({"top":"37px !important", "transform":"none !important"});
+
+                    });
+                    $('#example-getting-started').multiselect({
+
+                        includeSelectAllOption: true,
+                        nonSelectedText: 'Select Capacity',
+                    });
+
+                    $(document).ready(function(){
+                        // $('#popup').css("display","none");
+                        $(document).mouseup(function(e){ var container = $("#myTabContent"); if (!container.is(e.target) && container.has(e.target).length === 0){ container.find(".tab-pane").removeClass("active");  
+                          $("#myTab").find(".nav-link").removeClass("active");
+                      }
+                  });
+                        var chngclassname= document.getElementsByClassName("multiselect dropdown-toggle btn btn-default");
+
+                            // console.log(chngclassname.length);
+                            for(t=0; t<chngclassname.length; t++){
+                                chngclassname[t].classList.add('custom-select');
+                        // console.log(chngclassname);
+                    }
+
+                    $('.multi-checkbox').multiselect();
+                    $('#example-reset-form').on('reset', function() {
+                        $('.multi-checkbox option:selected').each(function() {
+                            $(this).prop('selected', false);
+                        })
+
+                        $('.multi-checkbox').multiselect('refresh');
+                    });
+
+                    $('#clear1').click(function() {
+                        $('#popup-sidebar').css("display","none");
+                        $('#bar_graph').css("display","block");
+
+                    });
+
+
+                    $.getJSON( "http://hydro.naxa.com.np/api/district/", function( dist ) {
+
+                        $.getJSON( "http://hydro.naxa.com.np/api/gapanapa/", function( gapanapa ) {
+                        distValue = [];
+                        gapanapavalue=[];
+                    function loadDistrictList(dist){
+                                          // console.log(dist.length);
+                                          // console.log(dist);
+                                          for(var i=0;i<dist.length;i++){
+
+                                            distValue.push({"label" : dist[i].name});
+                                            
+                                        }
+                                        // console.log(distValue);
+                                            // $("#inputProvince").html('Province '+province+'<span class="caret"></span>');   
+                                   
+                        return distValue,dist;
+                    }
+                    function loadMunicipalList(gapanapa){
+                                          // console.log(gapanapa.length);
+
+                                          for(var i=0;i<gapanapa.length;i++){
+
+                                            gapanapavalue.push({"label" : gapanapa[i].name});
+                                        
+                                        }
+                                      
+                        return gapanapavalue;
+                    }
+
+
+    var distValues= loadDistrictList(dist);
+    var gapanapavalue= loadMunicipalList(gapanapa);
+ 
+
+    $("#inputDistrict").multiselect("dataprovider",distValue);
+        $("#inputDistrict").multiselect('selectAll', false);
+        $("#inputDistrict").multiselect('updateButtonText');
+
+    $("#inputLocalGovernment").multiselect("dataprovider",gapanapavalue);
+        $("#inputLocalGovernment").multiselect('selectAll', false);
+        $("#inputLocalGovernment").multiselect('updateButtonText');
+
+            // DISTRICT DATA CHANGE ON CLICK ON MULTI CHECKBOX START
+    function prepareDistData(province_id, districtArray, municipalArray, districtCount, district_val, munCount, municipal_val) {
+
+            for (var i = 0; i < province_id.length; i++) {
+                for (var j = 0; j < districtCount; j++) {
+                    if (province_id.length != 0 && districtArray[j].province == province_id[i]) {
+
+                        district_val.push({
+                            "label": districtArray[j].name
+                        })
+                    } else {
+
+                    }
+
+                }
+
+                for (var k = 0; k < munCount; k++) {
+                    if (province_id.length != 0 && municipalArray[k].province == province_id[i]) {
+
+                        municipal_val.push({
+                            "label": municipalArray[k].name
+                        })
+
+                    }
+                }
+            }
+
+        }
+        // DISTRICT DATA CHANGE ON CLICK ON MULTI CHECKBOX END
+
+
+
+
+        // MUNICIPAL DATA CHANGE ON CLICK ON MULTI CHECKBOX START
+        function prepareMunicipalData(district_val, munCount, municipalArray, municipal_data) {
+            // console.log(municipalArray);
+            for (var l = 0; l < district_val.length; l++) {
+                for (var k = 0; k < munCount; k++) {
+
+                    if (district_val.length != 0 && municipalArray[k].district == district_val[l]) {
+
+                        municipal_data.push({
+                            "label": municipalArray[k].name
+                        })
+
+                    }
+
+                }
+
+            }
+            console.log(municipal_data);
+        }
+        // MUNICIPAL DATA CHANGE ON CLICK ON MULTI CHECKBOX END
+
+
+
+        var municipalArray = jQuery.extend(true, {}, gapanapa);
+        var munCount = Object.keys(municipalArray).length;
+
+        $('#inputProvince').on('change', function() {
+
+            var districtArray = jQuery.extend(true, {}, dist);
+            var districtCount = Object.keys(districtArray).length;
+
+
+            var province_id = $('#inputProvince').val();
+            district_val = [];
+            municipal_val = [];
+            const isInArray = province_id.includes("Province 2");
+            if(isInArray==true){
+                alert("Province 2 has No Hydropower");
+            }
+            
+            if (province_id.length == 7 || province_id.length == 0) {
+
+
+                console.log(distValue);
+                $("#inputDistrict").multiselect("dataprovider", distValue);
+                $("#inputLocalGovernment").multiselect("dataprovider", gapanapavalue);
+            } else {
+                prepareDistData(province_id, districtArray, municipalArray, districtCount, district_val, munCount, municipal_val);
+                // console.log(district_val);
+                $("#inputDistrict").multiselect("dataprovider", district_val);
+                $("#inputLocalGovernment").multiselect("dataprovider", municipal_val);
+            }
+
+        });
+
+
+        $('#inputDistrict').on('change', function() {
+            // console.log("LOCAL GOV CHANGE");
+            var district_val = $('#inputDistrict').val();
+            // console.log(district_val);
+            municipal_data = [];
+            if (district_val.length == 55 || district_val.length == 0) {
+                $("#inputLocalGovernment").multiselect("dataprovider", gapanapavalue);
+            } else {
+                prepareMunicipalData(district_val, munCount, municipalArray, municipal_data);
+                $("#inputLocalGovernment").multiselect("dataprovider", municipal_data);
+            }
+        });
+
+        // function for getting district mun by clicking province END
+
+    });
+});
+
+    $(".sidebar-toggle").click(function(){
+        $(this).parent('.sidebar').toggleClass('active');
+        $(this).children('.sidebar-toggle i').toggleClass('la-close');
+        if($(this).parent('.sidebar').hasClass('sb-left')){
+            $("#main-container").toggleClass('pull-from-left');
+        }else if($(this).parent('.sidebar').hasClass('sb-right')){
+            $("#main-container").toggleClass('pull-from-right');
+        }
+    });
+
+    $(".toggle-timeline").click(function(){
+                                //console.log("working");
+                                $('#timeline-sidebar').toggleClass('active');
+                            });
+
+                            //$(".sidebar").css('padding-top', $("#app-header").height() + 30);
+
+                            //Map Height
+                            // mapHeight();
+                            // window.onresize = function(event) {
+                            //     mapHeight();
+                            // }
+
+                            // function mapHeight() {
+                            //     vph = $(window).height();
+                            //     vph = vph - $("#app-header").height();
+                            //     $("#map").height(vph);
+                            // }
+
+                            //Make it scroll
+                            if ($.fn.niceScroll) {
+                                $(".scrolling-wrap").niceScroll({
+                                    cursorcolor: "#a89138",
+                                    cursorborderradius: "0px",
+                                    cursorborder: "",
+                                    cursorwidth: "8px",
+                                    //autohidemode: false
+                                });
+                                $(".scrolling-wrap").mouseover(function() {
+                                    $(".scrolling-wrap").getNiceScroll().resize();
+                                });
+                            }
+
+                            $(".widget-header").click(function () {
+                                $(this).find('i').toggleClass('la-plus-square');
+                            });
+
+
+                            //
+                            //$('.select2').select2();
+
+                            //
+                            //$("#dateslider").dateRangeSlider();
+
+                            $('#eye-slash').on('click',function(){
+                                //console.log($(".togglepanels").css('display'));
+                                if($(".togglepanels").css('display') == "block"){
+                                    $(".togglepanels").css('display','none');
+                                }
+                                else {
+                                    $(".togglepanels").css('display','block');
+                                }
+                                
+                            });
+
+                        });
+            var myVar;
+
+            function myFunction() {
+                myVar = setTimeout(showPage, 3000);
+            }
+
+            function showPage() {
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("myDiv").style.display = "block";
+          }
+
+          function onbtn() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function offbtn() {
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+    {% endblock %}
+
+
+                    <!-- <script>
+                        $(document).ready(function(){ 
+                            var map = L.map('map').setView([27.717245,85.323959], 6),
+                            drawnItems = new L.FeatureGroup().addTo(map);
+
+                            L.tileLayer("http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg", {
+                                att
+
+

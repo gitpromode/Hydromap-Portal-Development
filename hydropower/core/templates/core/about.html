@@ -1,0 +1,265 @@
+{% load static %}
+<html>
+<head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+            <title></title>
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="apple-touch-icon" href="apple-touch-icon.png">
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
+            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/multiple-select.css' %}"> -->
+            <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.1.0/ol.css"> -->
+            
+            <!-- <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css"> -->
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}"> -->
+            <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+            <link rel="stylesheet" href="{% static 'assets/css/aboutstyle.css' %}">
+         
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/mdb.css' %}"> -->
+
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap-multiselect.css' %}"> -->
+            <link rel="stylesheet" href="{% static 'assets/css/bootstrap-3.3.2.min.css' %}">
+            <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.15/css/bootstrap-multiselect.css" charset="utf-8"></script> -->
+            <link rel="stylesheet" href="{% static 'assets/css/nouislider.min.css' %}">
+            <!-- <link rel="stylesheet" href="{% static 'assets/css/style.css' %}"> -->
+
+
+          
+            <script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+            <link href="https://fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+            <style>
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.foot_sec_niti{
+   text-align: center;
+   margin-top: 2px;
+   background: #d1d1d1;
+
+
+}.foot_sec_nitis{
+   text-align: center;
+   background: #d1d1d1;
+
+
+}
+           
+                .light-text {
+      font-weight: 300;
+      margin-top: 4px;
+  }
+  .logo-bar{
+    margin-left: 23rem; margin-bottom: -13rem !important; margin-top: -13rem !important;
+  }.logo-bar1{
+    margin-left: 44rem; margin-bottom: -13rem !important; margin-top: -13rem !important;
+  }
+.logos{
+  margin-left: 13px
+}
+.foot_sec_niti{
+  padding-left: 70px
+}.foot_sec_nitis{
+  padding-left: 70px
+}
+.img-padd{
+  padding-top: 36px;
+}
+
+
+
+
+ 
+            </style>
+	 <body class="">
+ 
+                <!--[if lt IE 8]>
+                    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+                    <![endif]-->
+                        <header id="app-header">
+                            <nav class="navbar navbar-expand-lg navbar-light">
+                             <a>Nepal</a>
+                                <a class="navbar-brand text-left" href="{% url 'home' %}">
+                                 
+                                    <!-- <img src="{% static 'assets/img/hydroicon.png' %}" alt="" height="35"> -->
+                                   <span><strong>Hydropower</strong><br/>Portal</span>
+                                </a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link highlight" href="http://staging.nitifoundation.org/">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link highlight" href="{% url 'home' %}">Map</a>
+                                    </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'core:datasets' %}">Datasets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a id="active" class="nav-link highlight" href="{% url 'core:about' %}">About</a>
+                                    </li>
+                                    
+
+
+                      <!-- <li class="nav-item">
+                        <a class="nav-link" href="#">Infographics</a>
+                    </li> -->
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section id="about">
+      <div class="container">
+        <div class="row about-container">
+
+
+
+          <div class="col-lg-6 content ">
+            <h2 class="title">About Us</h2>
+            <p>
+             The Hydro Map project is developed under the “Improving the sharing and use of data as evidence for development in Nepal program, supported by, The Asia Foundation and Development Initiatives, implemented by Niti Foundation. The project aims to provide the hydropower related development data for all the stakeholders and help on evidence based policy making. This project is developed in order ensure the availability and accessibility of the hydro power related data to the public, as there is the dire need for this type of data.
+
+            </p>
+
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fa fa-map-marked-alt"></i></div>
+              <h4 class="title"><a href="">Interactive Web mapping of hydropower projects</a></h4>
+              <p class="description">It provides all the interactive part related with map and Hydropower Project which is Categorized as Survey,Generation and Operation.It Also Provides the Extra Detail Related With The Hydropower Project.</p>
+            </div>
+ 
+            <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+              <div class="icon"><i class="far fa-image"></i></div>
+              <h4 class="title"><a href="">Summary statistics</a></h4>
+              <p class="description">The Hydropower Portral Provides All The Statistics Related With The Hydropower Numbering and Gives Out on a Summarized Version To Get The Best Detail From It.</p>
+            </div>
+
+            <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
+              <div class="icon"><i class="far fa-chart-bar"></i></div>
+              <h4 class="title"><a href="">Datasets and Tabular view </a></h4>
+              <p class="description">Every Hydropower Detail has Been Provided in Datasets Format with Different Datatables and with Filters On Different Measure like of Based On Certain Province,District,Local Government .It is Also Presented in Tabular View For the Better Understanding.</p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+          <img align="right" class="" src="/static/images/about.jpg" alt="Girl in a jacket"  style="width:700px;height:500px; margin-top: 50px;">
+        </div>
+        
+
+      </div>
+
+    </section>
+    <footer>
+    <div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="f-org-box">
+        <a href="http://staging.nitifoundation.org" target="_blank" title="">
+          <img src="/static/images/hydroicon.png">
+        </a>
+        <p>
+        Every Hydropower Detail has Been Provided in Datasets Format with Different Datatables and with Filters On Different Measure like of Based On Certain Province,District,Local Government .It is Also Presented in Tabular View For the Better Understanding.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="f-box">
+        <h6>Supported By:</h6>
+        <a href="https://asiafoundation.org/where-we-work/nepal/" title="">
+          <img src="/static/images/asia_foundation.png">
+        </a>
+        <a href="http://devinit.org/topics/nepal/" title="">
+          <img src="/static/images/developmentinitiative.png">
+        </a>
+        <a href="http://naxa.com.np" title="">
+          <img src="/static/images/d4d.png">
+        </a>
+      </div>
+      <div class="f-box">
+        <h6>Developed By:</h6>
+        <a href="http://naxa.com.np" title="">
+          <img src="/static/images/naxa.png">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- <div class="row foot_sec_niti">
+ <div class="col-sm-2">
+    <a href="http://staging.nitifoundation.org" target="_blank" rel="noopener noreferrer"><img src="/static/images/hydroicon.png" style="max-width: 100px;" class="img-fluid pr-5 img-padd"></a>
+ </div>
+<div id="supported"> Supported By:
+ <div class="col-sm-2 logos">
+    <a href="https://asiafoundation.org/where-we-work/nepal/" target="_blank" rel="noopener noreferrer"><img src="/static/images/asia_foundation.png" style="max-width: 200px" class="img-fluid pr-5 img-padd" ></a>
+
+ </div>
+ 
+ <div class="col-sm-2 logos">
+    <a href="http://devinit.org/topics/nepal/" target="_blank" rel="noopener noreferrer"><img src="/static/images/developmentinitiative.png" style="max-width:200px;" class="img-fluid pr-5 img-padd"></a>
+
+ </div>
+ 
+ <div class="col-sm-2 logos" >
+    <a href="http://naxa.com.np" target="_blank" rel="noopener noreferrer"><img src="/static/images/d4d.png" style="max-width:200px; " class="img-fluid pr-5 img-padd"></a>
+     
+ </div>
+ </div>
+ <div id="developed">Developed By:
+<div class="col-sm-2 logos" >
+    <a href="http://naxa.com.np" target="_blank" rel="noopener noreferrer"><img src="/static/images/naxa.png" style="max-width:200px;" class="img-fluid pr-5 img-padd"></a>
+     
+
+ </div>
+ </div>
+ </div> --> 
+<!--  <div class="row foot_sec_nitis">
+ <div class="col-sm-2 logos">
+    <p class="light-text"><b>Niti Foundation</b></p>
+
+ </div>
+ <div class="col-sm-2 logos ">
+     <p class="light-text"><b>Asia Foundation</b></p>
+
+ </div>
+ <div class="col-sm-2 logos">
+     <p class="light-text"><b>Development Initiatives</b></p> 
+
+ </div>
+ <div class="col-sm-2 logos" >
+     <p class="light-text"><b>Data For Development</b> </p>
+
+ </div>
+  <div class="col-sm-2 logos" >
+     <p class="light-text"><b>Naxa</b></p>
+ </div>
+ </div> -->
+      
+    </footer>
+    
+
+<script src="{% static 'assets/js/vendor/jquery-3.2.1.min.js' %}"></script>
+<!-- <script src="{% static 'assets/js/vendor/popper.min.js' %}"></script> -->
+            <!-- <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script> -->
+            <!-- <script src="{% static 'assets/admin/js/vendor/jquery/jquery.min.js' %}"></script> -->
+            <!-- <script src="{% static 'assets/js/bootstrap-3.3.2.min.js' %}"></script> -->
+
+            <!-- <script src="{% static 'assets/js/vendor/jquery.nicescroll.min.js' %}"></script> -->
+            <!-- <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script> -->
+            <script src="{% static 'assets/js/nouislider.min.js' %}"></script>
+            <!-- <script src="{% static 'assets/js/OpenLayers.js' %}" type="text/javascript"></script> -->
+            <!-- <script src="{% static 'assets/js/popup.js' %}" type="text/javascript"></script> -->
+            <!-- <script src="{% static 'assets/js/feature.js' %}" type="text/javascript"></script> -->
+            <!-- <script src="{% static 'assets/js/multi-check.js' %}" type="text/javascript"></script> -->
+            <!-- <script src="{% static 'assets/js/jquery.typeahead.js' %}" type="text/javascript"></script> -->
+          <!--   <script src="{% static 'assets/data/hydro.js' %}" type="text/javascript"></script>
+            <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script> -->
+</body>
+
+</html>

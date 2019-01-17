@@ -1,0 +1,111 @@
+{% extends '_base.html' %}
+
+{% block content %}
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading clearfix">
+                        <h4 class="pull-left"><b>GIS Layers</b></h4>
+
+                         <div class="tools pull-right">
+                            <a href="javascript:;" class="fa fa-chevron-down"></a>
+                            <a href="javascript:;" class="fa fa-cog"></a>
+                            <a href="javascript:;" class="fa fa-times"></a>
+                        </div>
+                    </header>
+                    <div class="d-flex justify-content-center">
+                        <div class="col-md-3 col-lg-8"><a href="{% url 'core:gislayer_add' %}" title=""
+                                                          class="btn btn-xs btn-primary"><i
+                                class="la la-plus"></i>Add New GISLayer</a></p>
+                            <div class="dash-right">
+                                <div class="widget-info margin-top-large">
+                                    <table id="gallery" class="table table-bordered">
+                                        <p>
+                                            <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Geojson File</th>
+                                                <th>Style</th>
+                                                {% if userrole.can_edit %}
+                                                <th>Edit</th>
+                                                {% endif %}
+                                                {% if userrole.can_delete %}
+                                                <th>Delete</th>
+                                                {% endif %}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for gis in gislayer %}
+                                            <tr>
+                                                <td>{{gis.name}}</a></td>
+                                                <td>{{gis.file}}</td>
+                                                <td><a href="{% url 'core:gis_style' gis.id %}"><button>Style</button></td>
+                                                {% if userrole.can_edit %}
+                                                <td><a href="{% url 'core:gislayer_edit' gis.id %}">Edit</a></td>
+                                                {% endif %}
+                                                {% if userrole.can_delete %}
+                                                <td><a href="{% url 'core:gislayer_delete' gis.id %}">Delete</a></td>
+                                                {% endif %}
+                                            </tr>
+                                            {%endfor%}
+                                            </tbody>
+                                        </p>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="panel-body">-->
+                        <!--<div>-->
+                            <!--<span class="tools pull-right"><a class="btn btn-xs btn-primary" href="{% url 'core:gislayer_add' %}">Add New GISLayer</a></span>-->
+                        <!--</div><br><br><br>-->
+                        <!--<div class="mb-3 pb-3 bg-white">-->
+                            <!--<div class="table-responsive">-->
+                                <!--<table id="gislayer" class="table table-hover table-striped">-->
+                                <!--<thead>-->
+                                    <!--<tr>-->
+                                        <!--<th>Name</th>-->
+                                        <!--<th>Geojson File</th>-->
+                                        <!--<th>Style</th>-->
+                                        <!--{% if userrole.can_edit %}-->
+                                        <!--<th>Edit</th>-->
+                                        <!--{% endif %}-->
+                                        <!--{% if userrole.can_delete %}-->
+                                        <!--<th>Delete</th>-->
+                                        <!--{% endif %}-->
+                                    <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                    <!--{% for gis in gislayer %}-->
+                                    <!--<tr>-->
+                                        <!--<td>{{gis.name}}</a></td>-->
+                                        <!--<td>{{gis.file}}</td>-->
+                                        <!--<td><a href="{% url 'core:gis_style' gis.id %}"><button>Style</button></td>-->
+                                        <!--{% if userrole.can_edit %}-->
+                                        <!--<td><a href="{% url 'core:gislayer_edit' gis.id %}">Edit</a></td>-->
+                                        <!--{% endif %}-->
+                                        <!--{% if userrole.can_delete %}-->
+                                        <!--<td><a href="{% url 'core:gislayer_delete' gis.id %}">Delete</a></td>-->
+                                        <!--{% endif %}-->
+                                    <!--</tr>-->
+                                    <!--{%endfor%}-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </section>
+            </div>
+        </div>
+
+       
+        <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+{% endblock %}

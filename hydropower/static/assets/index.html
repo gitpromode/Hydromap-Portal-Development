@@ -1,0 +1,356 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"  lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="stylesheet" href="assets/css/nouislider.min.css">
+        <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+    </head>
+    <body class="overflow-off">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header id="app-header" class="bs-2">
+            <nav class="navbar navbar-expand-lg navbar-left bg-white">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="la la-map"></i></a>
+                  </li>
+                </ul>
+              <a class="navbar-brand" href="#"><strong>Niti</strong> Foundation</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Datasets</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Infographics</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+        </header>
+
+        <div id="main-container">
+            <div id="map" class="map-holder"></div>
+            <aside class="sidebar sm-sidebar sb-top-right">
+                <div class="content-holders">
+                    
+                        <div class="tabbing bs-2">
+                            <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                              <li class="nav-item">
+                                <a class="nav-link" id="tab001-tab" data-toggle="tab" href="#tab001" role="tab" aria-controls="tab001" aria-selected="true"><i class="la la-map"></i></a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" id="tab002-tab" data-toggle="tab" href="#tab002" role="tab" aria-controls="tab002" aria-selected="false"><i class="la la-line-chart"></i></a>
+                              </li>
+                            </ul>
+                            <div class="tab-content bg-white" id="myTabContent">
+                                <div class="tab-pane fade" id="tab001" role="tabpanel" aria-labelledby="tab001-tab">
+
+                                    <ul class="toggle-list">
+                                        <li>
+                                            <span><strong>River</strong></span>
+                                            <label class="switch switch-xxs">
+                                                <input type="checkbox">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <span><strong>Road</strong></span>
+                                            <label class="switch switch-xxs">
+                                                <input type="checkbox">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <span><strong>Trans</strong></span>
+                                            <label class="switch switch-xxs">
+                                                <input type="checkbox">
+                                                <span class="slider"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                              <div class="tab-pane fade" id="tab002" role="tabpanel" aria-labelledby="tab002-tab">
+                                <div class="scrolling-wrap sh-200">
+                                <ul class="maptype-list">
+                                    <li class="active">
+                                        <span class="img-maptype mt-terrain"></span>
+                                        <h6>Terrain</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-satellite"></span>
+                                        <h6>Satellite</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-openstreet"></span>
+                                        <h6>Open Street</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-dark"></span>
+                                        <h6>Dark</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-positron"></span>
+                                        <h6>Positron</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-hybrid"></span>
+                                        <h6>Hybrid</h6>
+                                    </li>
+                                    <li>
+                                        <span class="img-maptype mt-landsat"></span>
+                                        <h6>Landsat</h6>
+                                    </li>
+                                </ul>
+                                </div>
+                              </div>
+                            </div>
+							<div class="tab-content bg-white" id="myTabContent2">
+                      <div class="tab-pane fade show active" id="tab101" role="tabpanel" aria-labelledby="tab101-tab">
+                        <ul class="infograph-list">
+						<h4>Smmary Details</h4>
+                            <li>
+                                <p>Province</p>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>District</p>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 35%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <p>Local Government</p>
+                                <div class="progress" style="height: 8px;">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane fade" id="tab102" role="tabpanel" aria-labelledby="tab102-tab">
+                        <p>
+                            Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. 
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="tab103" role="tabpanel" aria-labelledby="tab103-tab">...</div>
+                    </div>
+                    </div>
+                </div>
+            </aside>
+            <aside id="timeline-sidebar" class="sidebar full-sidebar">
+                <div class="padding bg-white bs-2 mt-40px">
+                    <div class="sidebar-toggle toggle-timeline">
+                        <span>Timeline</span> <i class="la la-history"></i>
+                    </div>
+                    <div class="timeline-wrap">
+                        <div class="action-btn">
+                            <i class="la la-play"></i>
+                        </div>
+                        <div id="dateslider"></div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.2.1.min.js"><\/script>')</script>-->
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+		<script src="assets/js/vendor/popper.min.js"></script>
+        <!--<script src="assets/js/vendor/jquery-ui.min.js"></script>-->
+        <script src="assets/js/vendor/bootstrap.min.js"></script>
+        <script src="assets/js/vendor/jquery.nicescroll.min.js"></script>
+
+        <script src="assets/js/vendor/select2.min.js"></script>
+
+        <script src="assets/js/leaflet/leaflet-src.js"></script>
+        <script src="assets/js/leaflet/leaflet.ajax.min.js"></script>
+
+        
+        <!--<script src="assets/js/vendor/jQDateRangeSlider-min.js"></script>-->
+        
+        <script src="assets/js/plugins.js"></script>
+        <script src="assets/js/nouislider.min.js"></script>
+        <script>
+        	$(document).ready(function(){
+                $(".sidebar-toggle").click(function(){
+                    $(this).parent('.sidebar').toggleClass('active');
+                    $(this).children('.sidebar-toggle i').toggleClass('la-close');
+                    if($(this).parent('.sidebar').hasClass('sb-left')){
+                        $("#main-container").toggleClass('pull-from-left');
+                    }else if($(this).parent('.sidebar').hasClass('sb-right')){
+                        $("#main-container").toggleClass('pull-from-right');
+                    }
+                });
+
+                $(".toggle-timeline").click(function(){
+                    //console.log("working");
+                    $('#timeline-sidebar').toggleClass('active');
+                });
+
+                
+
+                //$(".sidebar").css('padding-top', $("#app-header").height() + 30);
+
+                //Map Height
+                mapHeight();
+                window.onresize = function(event) {
+                    mapHeight();
+                }
+
+                function mapHeight() {
+                    vph = $(window).height();
+                    vph = vph - $("#app-header").height();
+                    $("#map").height(vph);
+                }
+
+                //Make it scroll
+                if ($.fn.niceScroll) {
+                    $(".scrolling-wrap").niceScroll({
+                        cursorcolor: "#3399CC",
+                        cursorborderradius: "0px",
+                        cursorborder:"",
+                        cursorwidth: "7px",
+                        //autohidemode: false
+                    });
+                    $(".scrolling-wrap").mouseover(function() {
+                      $(".scrolling-wrap").getNiceScroll().resize();
+                    });
+                }
+
+                $(".widget-header").click(function(){
+                    $(this).find('i').toggleClass('la-minus-square');
+                });
+
+
+                //
+                $('.select2').select2();
+                
+                //
+                //$("#dateslider").dateRangeSlider();
+
+                // var $myGroup = $('#filterGroup');
+                // $myGroup.on('show.bs.collapse','.collapse', function() {
+                //     $myGroup.find('.collapse.show').collapse('hide');
+                //     $(this).find('i').toggleClass('la-minus-square');
+                // });
+        	});
+        </script>
+        <script>
+            $(document).ready(function(){ 
+                var map = L.map('map').setView([27.717245,85.323959], 6),
+                drawnItems = new L.FeatureGroup().addTo(map);
+
+                L.tileLayer("http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg", {
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>.'
+                }).addTo(map);
+				
+				var total_sites = L.geoJSON.ajax("assets/js/file.geojson",{
+                    pointToLayer: function(feature, latlng){
+                        //return L.circleMarker(latlng, geojsonMarkerStyle);
+						var greenIcon = L.icon({
+						iconUrl: 'assets/css/images/marker-icon.png',
+						shadowUrl: 'leaf-shadow.png',
+
+						iconSize:     [20, 30], // size of the icon
+						shadowSize:   [50, 64], // size of the shadow
+						iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+						shadowAnchor: [4, 62],  // the same for the shadow
+						popupAnchor:  [-12, -96] // point from which the popup should open relative to the iconAnchor
+					});
+					var marker = L.marker(latlng,{icon:greenIcon});
+                       return marker;         
+                    },
+                    onEachFeature: function onEachFeature(feature, layer){ //console.log(feature);
+                        //markers.addLayer(layer);
+						layer.bindPopup('<div class="popup-box"><h5>Project Name</h5><div class="table"><table><tr><td>Location</td><td>Solukhumbu sallery Nepal</td></tr><tr><td>Status</td><td>Ungoing</td></tr></table></div></div>');
+                    }
+                });//.addTo(map);
+				
+				total_sites.on('data:loaded', function() { 
+					// Add the cluster data after the geojson layer has loaded.
+					map.addLayer(total_sites);
+					//map.addLayer(markers);
+				});
+				
+				var dragTapSlider = document.getElementById('dateslider');
+
+				noUiSlider.create(dragTapSlider, {
+					animate: true,
+					animationDuration: 600,
+					range: {
+						'min': 2030,
+						'max': 2075
+					},
+
+					step: 5,
+
+					// Handles start at ...
+					//start: [ 1450, 2050, 2350, 3000 ],
+					start: [ 2030, 2075 ],
+
+					// ... must be at least 300 apart
+					margin: 0,
+
+					// ... but no more than 600
+					//limit: 600,
+
+					// Display colored bars between handles
+					//connect: true,
+
+					// Put '0' at the bottom of the slider
+					//direction: 'rtl',
+					orientation: 'horizontal',
+
+					// Move handle on tap, bars are draggable
+					behaviour: 'tap-drag',
+					tooltips: true,
+					/*format: wNumb({
+						decimals: 0
+					}),*/
+
+					// Show a scale with the slider
+					pips: {
+						mode: 'steps',
+						stepped: true,
+						density: 4
+					}
+				});
+				
+				$(".la-play").on('click',function(){
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2035); }, 1000);
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2040); }, 2000);
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2045); }, 3000);
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2050); }, 4000);
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2055); }, 5000);
+					setTimeout(function(){ dragTapSlider.noUiSlider.set(2060); }, 6000);
+					
+				
+				});
+				
+            });
+
+        </script>
+		<style>
+		.sidebar.sb-top-right{background:#efefef;width:250px;}
+
+		</style>
+	</body>
+</html>

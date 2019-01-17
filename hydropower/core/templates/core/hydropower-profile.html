@@ -1,0 +1,299 @@
+
+{% load static %}
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"  lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <script src="{% static 'assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+        <link href="https://fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+    </head>
+    <body class="page-dataset">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <header id="app-header" class="bs-2">
+            <nav class="navbar navbar-expand-lg navbar-light">
+            <a>Nepal</a>
+                <a class="navbar-brand text-left" href="{% url 'home' %}">
+                    <!-- <img src="{% static 'assets/img/hydroicon.png' %}" alt="" height="35"> -->
+                    <span><strong>Hydropower</strong><br/>Portal</span>
+                </a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                 <ul class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="http://staging.nitifoundation.org/">Home</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a  class="nav-link" href="{% url 'home' %}">Map</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'core:datasets' %}">Datasets</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'core:about' %}">About</a>
+                                    </li>
+                </ul>
+              </div>
+            </nav>
+        </header>
+        <div id="main-container">
+            <div class="page-header">
+                <div class="header-bg bg-primary">
+                    <img src="{% static 'assets/img/img-bg.jpg' %}">
+                </div>
+                <div class="container">
+                    <nav aria-label="breadcrumb" class="position-relative text-white">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'home' %}">Hydropowers</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{object.project}}</li>
+                      </ol>
+                    </nav>
+                    <div class="page-header">
+                        <h1>{{ object.project }}</h1>
+
+                    </div>
+                </div>
+            </div>
+            <div class="container mb-3 pb-3 profile-container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="tab001-tab" data-toggle="tab" href="#tab001" role="tab" aria-controls="tab001" aria-selected="true">About</a>
+                  </li>
+                  <!-- <li class="nav-item">
+                    <a class="nav-link" id="tab002-tab" data-toggle="tab" href="#tab002" role="tab" aria-controls="tab002" aria-selected="false">Documents</a>
+                  </li> -->
+                </ul>
+                <div class="tab-content bg-white" id="myTabContent">
+                  <div class="tab-pane fade show active" id="tab001" role="tabpanel" aria-labelledby="tab001-tab">
+                  <p>
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                                </p>
+                    <!-- <p>{{object.hydro_summary}}</p> -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="module-box">
+                                <div class="module-header">
+                                    <h4>Location</h4>
+                                </div>
+                                <div class="module-section">
+                                    <div class="embed-responsive embed-responsive-4by3">
+                                      <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28198.689560008817!2d85.35566588499206!3d27.937666514742318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eae4055a15f7f5%3A0x882b361250a8387!2sGhatte+Khola!5e0!3m2!1sen!2snp!4v1535696107277" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="module-box">
+                                <div class="module-header">
+                                    <h4>Summary</h4>
+                                </div>
+                                <div class="module-section">
+                                    <div id="hydropower-progress" style="height: 150px;" class="hydropower"></div>
+                                    <p>
+                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="module-box">
+                                <div class="module-header">
+                                    <h4>Hydropower Details</h4>
+                                </div>
+                                <div class="module-section">
+                                    Project Name: {{ hydropower.project }}<br>
+                                    Province: {{ hydropower.province_name }}<br>
+                                    District: {{ hydropower.district_name }}<br>
+                                    Gapa-Napa: {{ hydropower.gapanapa_name }}<br>   
+                                    Capacity (MW): {{ hydropower.capacity }}<br>
+                                    River: {{ hydropower.river }}<br>
+                                    Lic Number: {{ hydropower.lic_number }}<br>
+                                    Issue Date Years: {{ hydropower.issue_date_years }}<br>
+                                    Issue Date Months: {{ hydropower.issue_date_months }}<br>
+                                    Issue Date Days: {{ hydropower.issue_date_days }}<br>
+                                    Validity Date Years: {{ hydropower.validity_date_years }}<br>
+                                    Validity Date Months: {{ hydropower.validity_date_months }}<br>
+                                    Validity Date Days: {{ hydropower.validity_date_days }}<br>
+                                    Promoter: {{ hydropower.promoter }}<br>
+                                    Address: {{ hydropower.address }}<br>
+                                    Longitude: {{ hydropower.longitude }}<br>
+                                    Latitude: {{ hydropower.latitude }}<br>
+                                    License Type: {{ hydropower.license_type }}<br>
+                                    Date of Operation: {{ hydropower.date_of_operation }}<br>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- <div class="module-box">
+                                <div class="module-header">
+                                    <h4>Budget</h4>
+                                </div>
+                                <div class="module-section">
+                                    <canvas id="budgetChart"></canvas>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="tab002" role="tabpanel" aria-labelledby="tab002-tab">
+                    <p>
+                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                    </p>
+                    <ul class="document-list">
+                        <li>
+                            {% for doc in document %}
+                            <h5><a href="#" title="">{{doc.name}}&nbsp;&nbsp;&nbsp;({{doc.updated_at}})</a></h5>
+                            <p>{{doc.docfile}}</p><br>
+                            {%endfor%}
+                        </li>
+<!--                         <li>
+                            <h5><a href="#" title="">Annual review (5) 200236 (Published - June, 2017)</a></h5>
+                            <p>Open Document Format</p>
+                        </li>
+                        <li>
+                            <h5><a href="#" title="">Annual review (5) 200236 (Published - June, 2017)</a></h5>
+                            <p>Open Document Format</p>
+                        </li>
+                        <li>
+                            <h5><a href="#" title="">Annual review (5) 200236 (Published - June, 2017)</a></h5>
+                            <p>Open Document Format</p>
+                        </li>
+                        <li>
+                            <h5><a href="#" title="">Annual review (5) 200236 (Published - June, 2017)</a></h5>
+                            <p>Open Document Format</p>
+                        </li>
+ -->                    </ul>
+                </div>
+            </div>              
+        </div>
+
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-3.2.1.min.js"><\/script>')</script>-->
+        <script>window.jQuery || document.write('<script src="{% static 'assets/js/vendor/jquery-3.2.1.min.js' %}"><\/script>')</script>
+		<script src="{% static 'assets/js/vendor/popper.min.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/bootstrap.min.js' %}"></script>
+
+        <script src="{% static 'assets/js/vendor/Chart.bundle.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'assets/js/vendor/d3.v3.js' %}"></script>
+        <script src="{% static 'assets/js/vendor/progress.js' %}"></script>
+        
+        <script src="{% static 'assets/js/plugins.js' %}"></script>
+
+        <script>
+            $(document).ready(function(){
+                var phHeight = $(".page-header").height();
+                 $(".header-bg").height(phHeight);
+
+                 var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                var ctx = document.getElementById("budgetChart");
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'Budget',
+                            data: [10000, 20000, 15000, 26000, 18000, 13000, 10000],
+                            backgroundColor: [
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA'
+                            ],
+                            borderColor: [
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA',
+                                '#CACACA'
+                            ],
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Spend',
+                            data: [5000, 12000, 8000, 14000, 9000, 10000, 7000],
+                            backgroundColor: [
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7'
+                            ],
+                            borderColor: [
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7',
+                                '#3244b7'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            //display: false,
+                            position: 'bottom',
+                            labels:{
+                                fontSize: 14,
+                                fontFamily: "-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol'",
+                                padding: 20,
+                            } 
+                        },
+                        scales: {
+                            // xAxes: [{
+                            //     display: false
+                            // }],
+                            // yAxes: [{
+                            //     display: false
+                            // }]
+                        },
+                        layout: {
+                            // padding: {
+                            //     left: 0,
+                            //     right: 0,
+                            //     top: 0,
+                            //     bottom: 30
+                            // }
+                        }
+                    }
+                });
+
+
+                            var time = [ {label: "Actual Start",
+                          text: "13 Dec 2010",
+                          value: 1292198400000},
+                         {label: "Progress by time",
+                          text: "",
+                          value: new Date().getTime()},
+                         {label: "Planned End",
+                          text: "31 Dec 2020",
+                          value: 1609372800000}];
+            charts.progressBar("#hydropower-progress", time, function(d) { return d.value; }, function(d) { return d.label; }, function(d) { return d.text; });
+
+
+            });
+        </script>
+	</body>
+</html>
